@@ -1,22 +1,16 @@
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
-import 'listadeenvio_widget.dart' show ListadeenvioWidget;
+import 'editar_lista_envio_widget.dart' show EditarListaEnvioWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ListadeenvioModel extends FlutterFlowModel<ListadeenvioWidget> {
+class EditarListaEnvioModel extends FlutterFlowModel<EditarListaEnvioWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
 
   /// Initialization and disposal methods.
 

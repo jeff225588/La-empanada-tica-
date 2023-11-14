@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "41595062808",
+    "project_id": "enpanatica23",
+    "storage_bucket": "enpanatica23.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:41595062808:android:dec97a8499ab087096d16d",
+        "android_client_info": {
+          "package_name": "com.empanatica.proyectoempanatica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "41595062808-c9eh3klb3narhfjdgve4ljg4e3o6590k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.empanatica.proyectoempanatica",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "41595062808-8hgdp3nrf96kgvkcqgi3fpo02cum2bc7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTLTTam5ibWPGMF1vY7Vid_8kcwNAOu2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "41595062808-8hgdp3nrf96kgvkcqgi3fpo02cum2bc7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "41595062808-0f0ugbonjvfbnnbtnapoagagdhcsn506.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.empanatica.proyectoempanatica"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

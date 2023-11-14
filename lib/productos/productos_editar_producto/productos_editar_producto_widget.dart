@@ -7,34 +7,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'productos_nuevo_producto_model.dart';
-export 'productos_nuevo_producto_model.dart';
+import 'productos_editar_producto_model.dart';
+export 'productos_editar_producto_model.dart';
 
-class ProductosNuevoProductoWidget extends StatefulWidget {
-  const ProductosNuevoProductoWidget({Key? key}) : super(key: key);
+class ProductosEditarProductoWidget extends StatefulWidget {
+  const ProductosEditarProductoWidget({Key? key}) : super(key: key);
 
   @override
-  _ProductosNuevoProductoWidgetState createState() =>
-      _ProductosNuevoProductoWidgetState();
+  _ProductosEditarProductoWidgetState createState() =>
+      _ProductosEditarProductoWidgetState();
 }
 
-class _ProductosNuevoProductoWidgetState
-    extends State<ProductosNuevoProductoWidget> {
-  late ProductosNuevoProductoModel _model;
+class _ProductosEditarProductoWidgetState
+    extends State<ProductosEditarProductoWidget> {
+  late ProductosEditarProductoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProductosNuevoProductoModel());
+    _model = createModel(context, () => ProductosEditarProductoModel());
 
     _model.textController1 ??=
         TextEditingController(text: 'Ingresar descripción...');
     _model.textFieldFocusNode1 ??= FocusNode();
+
     _model.textController2 ??=
         TextEditingController(text: 'Ingresar cantidad...');
     _model.textFieldFocusNode2 ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -64,10 +66,10 @@ class _ProductosNuevoProductoWidgetState
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color(0xFF86080D),
+          backgroundColor: Color(0xFFDF2A00),
           automaticallyImplyLeading: false,
           title: Text(
-            'Nuevo Producto',
+            'Editar Producto',
             style: FlutterFlowTheme.of(context).displaySmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).primaryBackground,
@@ -264,9 +266,9 @@ class _ProductosNuevoProductoWidgetState
                 onPressed: () {
                   print('Button pressed ...');
                 },
-                text: 'Guardar',
+                text: 'Editar',
                 icon: Icon(
-                  Icons.save_as_rounded,
+                  Icons.edit_square,
                   size: 15.0,
                 ),
                 options: FFButtonOptions(
@@ -274,7 +276,7 @@ class _ProductosNuevoProductoWidgetState
                   padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Color(0xFF86080D),
+                  color: Color(0xFFDF2A00),
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Readex Pro',
                         color: Colors.white,

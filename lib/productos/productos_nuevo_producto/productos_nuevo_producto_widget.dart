@@ -1,3 +1,4 @@
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,34 +8,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'productos_editar_producto_model.dart';
-export 'productos_editar_producto_model.dart';
+import 'productos_nuevo_producto_model.dart';
+export 'productos_nuevo_producto_model.dart';
 
-class ProductosEditarProductoWidget extends StatefulWidget {
-  const ProductosEditarProductoWidget({Key? key}) : super(key: key);
+class ProductosNuevoProductoWidget extends StatefulWidget {
+  const ProductosNuevoProductoWidget({Key? key}) : super(key: key);
 
   @override
-  _ProductosEditarProductoWidgetState createState() =>
-      _ProductosEditarProductoWidgetState();
+  _ProductosNuevoProductoWidgetState createState() =>
+      _ProductosNuevoProductoWidgetState();
 }
 
-class _ProductosEditarProductoWidgetState
-    extends State<ProductosEditarProductoWidget> {
-  late ProductosEditarProductoModel _model;
+class _ProductosNuevoProductoWidgetState
+    extends State<ProductosNuevoProductoWidget> {
+  late ProductosNuevoProductoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProductosEditarProductoModel());
+    _model = createModel(context, () => ProductosNuevoProductoModel());
 
     _model.textController1 ??=
         TextEditingController(text: 'Ingresar descripción...');
     _model.textFieldFocusNode1 ??= FocusNode();
+
     _model.textController2 ??=
         TextEditingController(text: 'Ingresar cantidad...');
     _model.textFieldFocusNode2 ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -64,10 +67,10 @@ class _ProductosEditarProductoWidgetState
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color(0xFFDF2A00),
+          backgroundColor: Color(0xFF86080D),
           automaticallyImplyLeading: false,
           title: Text(
-            'Editar Producto',
+            'Nuevo Producto',
             style: FlutterFlowTheme.of(context).displaySmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).primaryBackground,
@@ -144,63 +147,167 @@ class _ProductosEditarProductoWidgetState
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 10.0, 10.0),
-                          child: FlutterFlowDropDown<String>(
-                            controller: _model.dropDownValueController1 ??=
-                                FormFieldController<String>(null),
-                            options: ['Option 1'],
-                            onChanged: (val) =>
-                                setState(() => _model.dropDownValue1 = val),
-                            width: double.infinity,
-                            height: 50.0,
-                            textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                            hintText: 'Seleccione Sucursal...',
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
+                          child: StreamBuilder<List<SucursalesRecord>>(
+                            stream: querySucursalesRecord(
+                              singleRecord: true,
                             ),
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            elevation: 2.0,
-                            borderColor: FlutterFlowTheme.of(context).alternate,
-                            borderWidth: 2.0,
-                            borderRadius: 8.0,
-                            margin: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 4.0, 16.0, 4.0),
-                            hidesUnderline: true,
-                            isSearchable: false,
-                            isMultiSelect: false,
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<SucursalesRecord>
+                                  dropDownSucursalesSucursalesRecordList =
+                                  snapshot.data!;
+                              // Return an empty Container when the item does not exist.
+                              if (snapshot.data!.isEmpty) {
+                                return Container();
+                              }
+                              final dropDownSucursalesSucursalesRecord =
+                                  dropDownSucursalesSucursalesRecordList
+                                          .isNotEmpty
+                                      ? dropDownSucursalesSucursalesRecordList
+                                          .first
+                                      : null;
+                              return FlutterFlowDropDown<String>(
+                                controller:
+                                    _model.dropDownSucursalesValueController ??=
+                                        FormFieldController<String>(
+                                  _model.dropDownSucursalesValue ??=
+                                      dropDownSucursalesSucursalesRecord
+                                          ?.sucursalesNombre,
+                                ),
+                                options: <String>[],
+                                onChanged: (val) => setState(
+                                    () => _model.dropDownSucursalesValue = val),
+                                width: double.infinity,
+                                height: 50.0,
+                                textStyle:
+                                    FlutterFlowTheme.of(context).bodyMedium,
+                                hintText: 'Seleccione Sucursal...',
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                borderWidth: 2.0,
+                                borderRadius: 8.0,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                hidesUnderline: true,
+                                isSearchable: false,
+                                isMultiSelect: false,
+                              );
+                            },
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 10.0, 10.0, 10.0),
-                          child: FlutterFlowDropDown<String>(
-                            controller: _model.dropDownValueController2 ??=
-                                FormFieldController<String>(null),
-                            options: ['Option 1'],
-                            onChanged: (val) =>
-                                setState(() => _model.dropDownValue2 = val),
-                            width: double.infinity,
-                            height: 50.0,
-                            textStyle: FlutterFlowTheme.of(context).bodyMedium,
-                            hintText: 'Unidad...',
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 24.0,
+                          child: StreamBuilder<List<ProductosUnidadRecord>>(
+                            stream: queryProductosUnidadRecord(
+                              singleRecord: true,
                             ),
-                            fillColor: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            elevation: 2.0,
-                            borderColor: FlutterFlowTheme.of(context).alternate,
-                            borderWidth: 2.0,
-                            borderRadius: 8.0,
-                            margin: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 4.0, 16.0, 4.0),
-                            hidesUnderline: true,
-                            isSearchable: false,
-                            isMultiSelect: false,
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<ProductosUnidadRecord>
+                                  dropDownUnidadProductosUnidadRecordList =
+                                  snapshot.data!;
+                              // Return an empty Container when the item does not exist.
+                              if (snapshot.data!.isEmpty) {
+                                return Container();
+                              }
+                              final dropDownUnidadProductosUnidadRecord =
+                                  dropDownUnidadProductosUnidadRecordList
+                                          .isNotEmpty
+                                      ? dropDownUnidadProductosUnidadRecordList
+                                          .first
+                                      : null;
+                              return FlutterFlowDropDown<String>(
+                                controller:
+                                    _model.dropDownUnidadValueController ??=
+                                        FormFieldController<String>(
+                                  _model.dropDownUnidadValue ??=
+                                      dropDownUnidadProductosUnidadRecord
+                                          ?.productosUnidadNombre,
+                                ),
+                                options: ['Option 1'],
+                                onChanged: (val) => setState(
+                                    () => _model.dropDownUnidadValue = val),
+                                width: double.infinity,
+                                height: 50.0,
+                                textStyle:
+                                    FlutterFlowTheme.of(context).bodyMedium,
+                                hintText: 'Unidad...',
+                                icon: Icon(
+                                  Icons.keyboard_arrow_down_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                                fillColor: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                                elevation: 2.0,
+                                borderColor:
+                                    FlutterFlowTheme.of(context).alternate,
+                                borderWidth: 2.0,
+                                borderRadius: 8.0,
+                                margin: EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 4.0, 16.0, 4.0),
+                                hidesUnderline: true,
+                                isSearchable: false,
+                                isMultiSelect: false,
+                              );
+                            },
+                          ),
+                        ),
+                        Align(
+                          alignment: AlignmentDirectional(1.00, 0.00),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 10.0, 0.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('productosNuevaUnidad');
+                              },
+                              child: Text(
+                                'Crear Nueva Unidad',
+                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              ),
+                            ),
                           ),
                         ),
                         Padding(
@@ -264,9 +371,9 @@ class _ProductosEditarProductoWidgetState
                 onPressed: () {
                   print('Button pressed ...');
                 },
-                text: 'Editar',
+                text: 'Guardar',
                 icon: Icon(
-                  Icons.edit_square,
+                  Icons.save_as_rounded,
                   size: 15.0,
                 ),
                 options: FFButtonOptions(
@@ -274,7 +381,7 @@ class _ProductosEditarProductoWidgetState
                   padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                   iconPadding:
                       EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Color(0xFFDF2A00),
+                  color: Color(0xFF86080D),
                   textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                         fontFamily: 'Readex Pro',
                         color: Colors.white,

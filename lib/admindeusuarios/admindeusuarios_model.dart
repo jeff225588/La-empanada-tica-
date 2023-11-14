@@ -1,23 +1,19 @@
-import '/flutter_flow/flutter_flow_drop_down.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
-import 'productos_widget.dart' show ProductosWidget;
-import 'package:auto_size_text/auto_size_text.dart';
+import 'admindeusuarios_widget.dart' show AdmindeusuariosWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ProductosModel extends FlutterFlowModel<ProductosWidget> {
+class AdmindeusuariosModel extends FlutterFlowModel<AdmindeusuariosWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for DropDown widget.
-  String? dropDownValue;
-  FormFieldController<String>? dropDownValueController;
 
   /// Initialization and disposal methods.
 

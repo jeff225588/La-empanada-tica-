@@ -1,3 +1,4 @@
+import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -30,8 +31,10 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
 
     _model.txtCorreoController ??= TextEditingController();
     _model.txtCorreoFocusNode ??= FocusNode();
+
     _model.txtPasswordController ??= TextEditingController();
     _model.txtPasswordFocusNode ??= FocusNode();
+
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
@@ -300,7 +303,22 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                             0.0, 0.0, 0.0, 16.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            context.pushNamed('productos');
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+
+                                            final user = await authManager
+                                                .signInWithEmail(
+                                              context,
+                                              _model.txtCorreoController.text,
+                                              _model.txtPasswordController.text,
+                                            );
+                                            if (user == null) {
+                                              return;
+                                            }
+
+                                            context.goNamedAuth(
+                                                'loginlaEmpanadaAlajuelita',
+                                                context.mounted);
                                           },
                                           text: 'Iniciar Sesión ',
                                           options: FFButtonOptions(
@@ -339,37 +357,62 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 12.0),
-                                          child: RichText(
-                                            textScaleFactor:
-                                                MediaQuery.of(context)
-                                                    .textScaleFactor,
-                                            text: TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text:
-                                                      '¿Olvido su contraseña?',
-                                                  style: TextStyle(),
-                                                ),
-                                                TextSpan(
-                                                  text: 'Recuperar contraseña',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                )
-                                              ],
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              GoRouter.of(context)
+                                                  .prepareAuthEvent();
+
+                                              final user = await authManager
+                                                  .createAccountWithEmail(
+                                                context,
+                                                _model.txtCorreoController.text,
+                                                _model
+                                                    .txtPasswordController.text,
+                                              );
+                                              if (user == null) {
+                                                return;
+                                              }
+
+                                              context.goNamedAuth(
+                                                  'loginlaEmpanadaAlajuelita',
+                                                  context.mounted);
+                                            },
+                                            child: RichText(
+                                              textScaleFactor:
+                                                  MediaQuery.of(context)
+                                                      .textScaleFactor,
+                                              text: TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        '¿Olvido su contraseña?',
+                                                    style: TextStyle(),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        'Recuperar contraseña',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                  )
+                                                ],
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium,
+                                              ),
                                             ),
                                           ),
                                         ),
