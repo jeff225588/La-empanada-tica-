@@ -6,25 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'lista_de_envio_model.dart';
-export 'lista_de_envio_model.dart';
+import 'resumen_lista_de_envio_model.dart';
+export 'resumen_lista_de_envio_model.dart';
 
-class ListaDeEnvioWidget extends StatefulWidget {
-  const ListaDeEnvioWidget({Key? key}) : super(key: key);
+class ResumenListaDeEnvioWidget extends StatefulWidget {
+  const ResumenListaDeEnvioWidget({Key? key}) : super(key: key);
 
   @override
-  _ListaDeEnvioWidgetState createState() => _ListaDeEnvioWidgetState();
+  _ResumenListaDeEnvioWidgetState createState() =>
+      _ResumenListaDeEnvioWidgetState();
 }
 
-class _ListaDeEnvioWidgetState extends State<ListaDeEnvioWidget> {
-  late ListaDeEnvioModel _model;
+class _ResumenListaDeEnvioWidgetState extends State<ResumenListaDeEnvioWidget> {
+  late ResumenListaDeEnvioModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ListaDeEnvioModel());
+    _model = createModel(context, () => ResumenListaDeEnvioModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -94,7 +95,7 @@ class _ListaDeEnvioWidgetState extends State<ListaDeEnvioWidget> {
                           EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).primary,
+                      color: Color(0xFFDF2A00),
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Readex Pro',
@@ -567,9 +568,13 @@ class _ListaDeEnvioWidgetState extends State<ListaDeEnvioWidget> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [],
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [],
+                ),
               ),
             ],
           ),

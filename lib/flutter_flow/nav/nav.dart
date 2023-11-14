@@ -149,9 +149,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EditarListaEnvioWidget(),
         ),
         FFRoute(
-          name: 'ListaDeEnvio',
-          path: '/listaDeEnvio',
-          builder: (context, params) => ListaDeEnvioWidget(),
+          name: 'ResumenListaDeEnvio',
+          path: '/resumenListaDeEnvio',
+          builder: (context, params) => ResumenListaDeEnvioWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

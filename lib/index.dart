@@ -18,5 +18,5 @@ export '/productos/productos_nueva_unidad/productos_nueva_unidad_widget.dart'
     show ProductosNuevaUnidadWidget;
 export '/pages/editar_lista_envio/editar_lista_envio_widget.dart'
     show EditarListaEnvioWidget;
-export '/pages/lista_de_envio/lista_de_envio_widget.dart'
-    show ListaDeEnvioWidget;
+export '/pages/resumen_lista_de_envio/resumen_lista_de_envio_widget.dart'
+    show ResumenListaDeEnvioWidget;

@@ -128,7 +128,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             10.0, 10.0, 10.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('ListaDeEnvio');
+                            context.pushNamed('ResumenListaDeEnvio');
                           },
                           text: 'Lista de Envío',
                           options: FFButtonOptions(

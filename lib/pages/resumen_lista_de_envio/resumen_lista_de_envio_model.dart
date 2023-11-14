@@ -2,13 +2,14 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'lista_de_envio_widget.dart' show ListaDeEnvioWidget;
+import 'resumen_lista_de_envio_widget.dart' show ResumenListaDeEnvioWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ListaDeEnvioModel extends FlutterFlowModel<ListaDeEnvioWidget> {
+class ResumenListaDeEnvioModel
+    extends FlutterFlowModel<ResumenListaDeEnvioWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
