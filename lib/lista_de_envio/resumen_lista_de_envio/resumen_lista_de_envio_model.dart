@@ -2,7 +2,6 @@ import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/lista_de_envio/editar_lista_de_envio/editar_lista_de_envio_widget.dart';
 import 'resumen_lista_de_envio_widget.dart' show ResumenListaDeEnvioWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
