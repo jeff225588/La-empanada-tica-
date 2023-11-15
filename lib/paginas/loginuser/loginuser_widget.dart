@@ -537,9 +537,7 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   8.0, 0.0, 8.0, 0.0),
                               tabs: [
-                                Tab(
-                                  text: 'Log In',
-                                ),
+                                Tab(),
                               ],
                               controller: _model.tabBarController,
                             ),

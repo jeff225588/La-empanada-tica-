@@ -123,14 +123,27 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Bienvenido a La Empanada Alajuelita Admin',
-                                        style: FlutterFlowTheme.of(context)
-                                            .headlineLarge,
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.00, 0.00),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 50.0, 0.0, 0.0),
+                                          child: Text(
+                                            'Crear cuenta para usuario',
+                                            style: FlutterFlowTheme.of(context)
+                                                .headlineLarge
+                                                .override(
+                                                  fontFamily: 'Outfit',
+                                                  fontSize: 25.0,
+                                                ),
+                                          ),
+                                        ),
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 0.0, 16.0),
+                                            0.0, 14.0, 0.0, 16.0),
                                         child: Container(
                                           width: double.infinity,
                                           child: TextFormField(
@@ -459,14 +472,18 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                           ),
                                         ),
                                       ),
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.asset(
-                                          'assets/images/La_Empanada_Alajuelita_2.jpg',
-                                          width: 330.0,
-                                          height: 320.0,
-                                          fit: BoxFit.cover,
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.00, 0.00),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: Image.asset(
+                                            'assets/images/La_Empanada_Alajuelita_2.jpg',
+                                            width: 330.0,
+                                            height: 320.0,
+                                            fit: BoxFit.cover,
+                                          ),
                                         ),
                                       ),
                                     ],

@@ -20,7 +20,7 @@ class EditarListaDeEnvioWidget extends StatefulWidget {
     required this.listaEnvio,
   }) : super(key: key);
 
-  final ListaDiariaRecord? listaEnvio;
+  final DocumentReference? listaEnvio;
 
   @override
   _EditarListaDeEnvioWidgetState createState() =>
@@ -42,19 +42,19 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
     _model = createModel(context, () => EditarListaDeEnvioModel());
 
     _model.txtProductoController ??=
-        TextEditingController(text: widget.listaEnvio?.productosDescripcion);
+        TextEditingController(text: widget.passProductoDescripcion);
     _model.txtProductoFocusNode ??= FocusNode();
 
     _model.txtCantidadController ??= TextEditingController(
         text: formatNumber(
-      widget.listaEnvio?.productosCantidad,
+      widget.passProductoCantidad,
       formatType: FormatType.decimal,
       decimalType: DecimalType.automatic,
     ));
     _model.txtCantidadFocusNode ??= FocusNode();
 
     _model.txtCategoriaController ??=
-        TextEditingController(text: widget.listaEnvio?.productosCategoria);
+        TextEditingController(text: widget.passProductoCategoria);
     _model.txtCategoriaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -474,7 +474,7 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                             .dropDownSeleccionarSucursalValueController ??=
                                         FormFieldController<String>(
                                       _model.dropDownSeleccionarSucursalValue ??=
-                                          widget.listaEnvio?.sucursalDestino,
+                                          widget.passSucursalDestino,
                                     ),
                                     options: ['La Empanada Poás de Aserrí'],
                                     onChanged: (val) => setState(() => _model
@@ -627,8 +627,8 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                             });
                                           }
                                         },
-                                        text: dateTimeFormat('MMMMEEEEd',
-                                            widget.listaEnvio!.fechaDeEntrega!),
+                                        text:
+                                            '${dateTimeFormat('MMMMEEEEd', widget.passFechaEntrega)}',
                                         icon: Icon(
                                           Icons.date_range,
                                           size: 15.0,
@@ -695,7 +695,7 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                     },
                     text: 'Editar Lista de Envío',
                     icon: Icon(
-                      Icons.mode_edit,
+                      Icons.add_shopping_cart,
                       size: 15.0,
                     ),
                     options: FFButtonOptions(
