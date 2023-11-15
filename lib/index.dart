@@ -16,7 +16,7 @@ export '/admindeusuarios/admindeusuarios_widget.dart'
 export '/editarusuario/editarusuario_widget.dart' show EditarusuarioWidget;
 export '/productos/productos_nueva_unidad/productos_nueva_unidad_widget.dart'
     show ProductosNuevaUnidadWidget;
-export '/paginas/editar_lista_envio/editar_lista_envio_widget.dart'
+export '/lista_de_envio/editar_lista_envio/editar_lista_envio_widget.dart'
     show EditarListaEnvioWidget;
 export '/lista_de_envio/resumen_lista_de_envio/resumen_lista_de_envio_widget.dart'
     show ResumenListaDeEnvioWidget;

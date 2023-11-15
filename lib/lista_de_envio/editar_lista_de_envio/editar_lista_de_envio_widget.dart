@@ -20,7 +20,7 @@ class EditarListaDeEnvioWidget extends StatefulWidget {
     required this.listaEnvio,
   }) : super(key: key);
 
-  final DocumentReference? listaEnvio;
+  final ListaDiariaRecord? listaEnvio;
 
   @override
   _EditarListaDeEnvioWidgetState createState() =>
@@ -42,19 +42,15 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
     _model = createModel(context, () => EditarListaDeEnvioModel());
 
     _model.txtProductoController ??=
-        TextEditingController(text: widget.passProductoDescripcion);
+        TextEditingController(text: widget.listaEnvio?.productosDescripcion);
     _model.txtProductoFocusNode ??= FocusNode();
 
     _model.txtCantidadController ??= TextEditingController(
-        text: formatNumber(
-      widget.passProductoCantidad,
-      formatType: FormatType.decimal,
-      decimalType: DecimalType.automatic,
-    ));
+        text: widget.listaEnvio?.productosCantidad?.toString());
     _model.txtCantidadFocusNode ??= FocusNode();
 
     _model.txtCategoriaController ??=
-        TextEditingController(text: widget.passProductoCategoria);
+        TextEditingController(text: widget.listaEnvio?.productosCategoria);
     _model.txtCategoriaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -474,7 +470,7 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                             .dropDownSeleccionarSucursalValueController ??=
                                         FormFieldController<String>(
                                       _model.dropDownSeleccionarSucursalValue ??=
-                                          widget.passSucursalDestino,
+                                          'La Empanada Poás de Aserrí',
                                     ),
                                     options: ['La Empanada Poás de Aserrí'],
                                     onChanged: (val) => setState(() => _model
@@ -627,8 +623,8 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                             });
                                           }
                                         },
-                                        text:
-                                            '${dateTimeFormat('MMMMEEEEd', widget.passFechaEntrega)}',
+                                        text: dateTimeFormat('MMMMEEEEd',
+                                            widget.listaEnvio!.fechaDeEntrega!),
                                         icon: Icon(
                                           Icons.date_range,
                                           size: 15.0,
@@ -670,91 +666,112 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                   ),
                 ),
               ),
-              Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      await currentUserReference!
-                          .update(createUserRecordData());
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Producto añadido a Lista Diaria',
-                            style: TextStyle(
-                              color: FlutterFlowTheme.of(context).primaryText,
-                            ),
-                          ),
-                          duration: Duration(milliseconds: 4000),
-                          backgroundColor:
-                              FlutterFlowTheme.of(context).secondary,
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(0.00, 0.00),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          context.safePop();
+                        },
+                        text: 'Cancelar',
+                        icon: Icon(
+                          Icons.arrow_back_sharp,
+                          size: 15.0,
                         ),
-                      );
-                    },
-                    text: 'Editar Lista de Envío',
-                    icon: Icon(
-                      Icons.add_shopping_cart,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      height: 40.0,
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFFDF2A00),
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
-                              ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      context.safePop();
-                    },
-                    text: 'Cancelar',
-                    icon: Icon(
-                      Icons.arrow_back_sharp,
-                      size: 15.0,
-                    ),
-                    options: FFButtonOptions(
-                      width: 240.0,
-                      height: 40.0,
+                  Align(
+                    alignment: AlignmentDirectional(0.00, 0.00),
+                    child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: FlutterFlowTheme.of(context).secondaryText,
-                      textStyle:
-                          FlutterFlowTheme.of(context).titleSmall.override(
-                                fontFamily: 'Readex Pro',
-                                color: Colors.white,
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await widget.listaEnvio!.reference
+                              .update(createListaDiariaRecordData(
+                            productosDescripcion:
+                                _model.txtProductoController.text,
+                            productosCantidad: double.tryParse(
+                                _model.txtCantidadController.text),
+                            productosCategoria:
+                                _model.txtCategoriaController.text,
+                            productosUnidad: widget.listaEnvio?.productosUnidad,
+                            sucursalDestino:
+                                _model.dropDownSeleccionarSucursalValue,
+                            fechaDeEntrega: _model.datePicked,
+                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Producto añadido a Lista Diaria',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
                               ),
-                      elevation: 3.0,
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1.0,
+                              duration: Duration(milliseconds: 4000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).clearSnackBars();
+                        },
+                        text: 'Guardar',
+                        icon: Icon(
+                          Icons.save,
+                          size: 15.0,
+                        ),
+                        options: FFButtonOptions(
+                          width: 147.0,
+                          height: 40.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: Color(0xFFDF2A00),
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                          elevation: 3.0,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
