@@ -13,31 +13,33 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'productos_agregar_a_listadeenvio_model.dart';
-export 'productos_agregar_a_listadeenvio_model.dart';
+import 'editar_lista_de_envio_model.dart';
+export 'editar_lista_de_envio_model.dart';
 
-class ProductosAgregarAListadeenvioWidget extends StatefulWidget {
-  const ProductosAgregarAListadeenvioWidget({
+class EditarListaDeEnvioWidget extends StatefulWidget {
+  const EditarListaDeEnvioWidget({
     Key? key,
     String? passProductosDescripcion,
-    String? passCategoria,
-    required this.passUnidad,
+    required this.passProductoCantidad,
+    required this.pasProductoCateoria,
+    required this.passSucursal,
+    required this.passFechaEntrega,
   })  : this.passProductosDescripcion = passProductosDescripcion ?? '1',
-        this.passCategoria = passCategoria ?? '1',
         super(key: key);
 
   final String passProductosDescripcion;
-  final String passCategoria;
-  final String? passUnidad;
+  final int? passProductoCantidad;
+  final String? pasProductoCateoria;
+  final String? passSucursal;
+  final DateTime? passFechaEntrega;
 
   @override
-  _ProductosAgregarAListadeenvioWidgetState createState() =>
-      _ProductosAgregarAListadeenvioWidgetState();
+  _EditarListaDeEnvioWidgetState createState() =>
+      _EditarListaDeEnvioWidgetState();
 }
 
-class _ProductosAgregarAListadeenvioWidgetState
-    extends State<ProductosAgregarAListadeenvioWidget> {
-  late ProductosAgregarAListadeenvioModel _model;
+class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
+  late EditarListaDeEnvioModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -48,7 +50,7 @@ class _ProductosAgregarAListadeenvioWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProductosAgregarAListadeenvioModel());
+    _model = createModel(context, () => EditarListaDeEnvioModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -575,7 +577,7 @@ class _ProductosAgregarAListadeenvioWidgetState
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text(
-                            'Producto añadido a lista diaria exitosamente',
+                            'Producto añadido a Lista Diaria',
                             style: TextStyle(
                               color: FlutterFlowTheme.of(context).primaryText,
                             ),
@@ -586,7 +588,7 @@ class _ProductosAgregarAListadeenvioWidgetState
                         ),
                       );
                     },
-                    text: 'Agregar a Lista de Envío',
+                    text: 'Editar Lista de Envío',
                     icon: Icon(
                       Icons.add_shopping_cart,
                       size: 15.0,

@@ -82,7 +82,7 @@ class _ResumenListaDeEnvioWidgetState extends State<ResumenListaDeEnvioWidget> {
                       EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 5.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      context.safePop();
+                      context.pushNamed('HomePage');
                     },
                     text: 'Volver',
                     icon: Icon(

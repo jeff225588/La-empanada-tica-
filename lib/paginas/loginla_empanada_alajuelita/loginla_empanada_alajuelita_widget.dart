@@ -2,7 +2,6 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -34,6 +33,9 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
 
     _model.txtPasswordController ??= TextEditingController();
     _model.txtPasswordFocusNode ??= FocusNode();
+
+    _model.txtPassword1Controller ??= TextEditingController();
+    _model.txtPassword1FocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -122,7 +124,7 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Bienvenido a La Empanada Alajuelita',
+                                        'Bienvenido a La Empanada Alajuelita Admin',
                                         style: FlutterFlowTheme.of(context)
                                             .headlineLarge,
                                       ),
@@ -301,13 +303,123 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 0.0, 0.0, 16.0),
+                                        child: Container(
+                                          width: double.infinity,
+                                          child: TextFormField(
+                                            controller:
+                                                _model.txtPassword1Controller,
+                                            focusNode:
+                                                _model.txtPassword1FocusNode,
+                                            autofocus: true,
+                                            autofillHints: [
+                                              AutofillHints.password
+                                            ],
+                                            obscureText:
+                                                !_model.txtPassword1Visibility,
+                                            decoration: InputDecoration(
+                                              labelText: 'Contraseña',
+                                              labelStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelLarge,
+                                              enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryBackground,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primary,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              errorBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              focusedErrorBorder:
+                                                  OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .alternate,
+                                                  width: 2.0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              filled: true,
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryBackground,
+                                              suffixIcon: InkWell(
+                                                onTap: () => setState(
+                                                  () => _model
+                                                          .txtPassword1Visibility =
+                                                      !_model
+                                                          .txtPassword1Visibility,
+                                                ),
+                                                focusNode: FocusNode(
+                                                    skipTraversal: true),
+                                                child: Icon(
+                                                  _model.txtPassword1Visibility
+                                                      ? Icons
+                                                          .visibility_outlined
+                                                      : Icons
+                                                          .visibility_off_outlined,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 24.0,
+                                                ),
+                                              ),
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyLarge,
+                                            validator: _model
+                                                .txtPassword1ControllerValidator
+                                                .asValidator(context),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 16.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
                                             GoRouter.of(context)
                                                 .prepareAuthEvent();
+                                            if (_model.txtPasswordController
+                                                    .text !=
+                                                _model.txtPassword1Controller
+                                                    .text) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Passwords don\'t match!',
+                                                  ),
+                                                ),
+                                              );
+                                              return;
+                                            }
 
                                             final user = await authManager
-                                                .signInWithEmail(
+                                                .createAccountWithEmail(
                                               context,
                                               _model.txtCorreoController.text,
                                               _model.txtPasswordController.text,
@@ -317,10 +429,9 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                             }
 
                                             context.goNamedAuth(
-                                                'loginlaEmpanadaAlajuelita',
-                                                context.mounted);
+                                                'HomePage', context.mounted);
                                           },
-                                          text: 'Iniciar Sesión ',
+                                          text: 'Crear cuenta',
                                           options: FFButtonOptions(
                                             width: double.infinity,
                                             height: 44.0,
@@ -345,75 +456,6 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(12.0),
-                                          ),
-                                        ),
-                                      ),
-
-                                      // You will have to add an action on this rich text to go to your login page.
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(0.00, 0.00),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 12.0, 0.0, 12.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              GoRouter.of(context)
-                                                  .prepareAuthEvent();
-
-                                              final user = await authManager
-                                                  .createAccountWithEmail(
-                                                context,
-                                                _model.txtCorreoController.text,
-                                                _model
-                                                    .txtPasswordController.text,
-                                              );
-                                              if (user == null) {
-                                                return;
-                                              }
-
-                                              context.goNamedAuth(
-                                                  'loginlaEmpanadaAlajuelita',
-                                                  context.mounted);
-                                            },
-                                            child: RichText(
-                                              textScaleFactor:
-                                                  MediaQuery.of(context)
-                                                      .textScaleFactor,
-                                              text: TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text:
-                                                        '¿Olvido su contraseña?',
-                                                    style: TextStyle(),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        'Recuperar contraseña',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primary,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                  )
-                                                ],
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium,
-                                              ),
-                                            ),
                                           ),
                                         ),
                                       ),

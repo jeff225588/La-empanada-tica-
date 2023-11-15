@@ -78,16 +78,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? LoginlaEmpanadaAlajuelitaWidget()
-          : HomePageWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? HomePageWidget() : LoginuserWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? LoginlaEmpanadaAlajuelitaWidget()
-              : HomePageWidget(),
+          builder: (context, _) =>
+              appStateNotifier.loggedIn ? HomePageWidget() : LoginuserWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -152,6 +150,23 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ResumenListaDeEnvio',
           path: '/resumenListaDeEnvio',
           builder: (context, params) => ResumenListaDeEnvioWidget(),
+        ),
+        FFRoute(
+          name: 'loginuser',
+          path: '/loginuser',
+          builder: (context, params) => LoginuserWidget(),
+        ),
+        FFRoute(
+          name: 'Sugerencias',
+          path: '/sugerencias',
+          builder: (context, params) => SugerenciasWidget(
+            sugerencia: params.getParam('sugerencia', ParamType.String),
+          ),
+        ),
+        FFRoute(
+          name: 'EnviaSugerencia',
+          path: '/enviaSugerencia',
+          builder: (context, params) => EnviaSugerenciaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -318,7 +333,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/homePage';
+            return '/loginuser';
           }
           return null;
         },

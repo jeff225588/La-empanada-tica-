@@ -74,7 +74,7 @@ class _AdmindeusuariosWidgetState extends State<AdmindeusuariosWidget> {
               await authManager.signOut();
               GoRouter.of(context).clearRedirectLocation();
 
-              context.goNamedAuth('HomePage', context.mounted);
+              context.goNamedAuth('loginuser', context.mounted);
             },
           ),
           title: Text(

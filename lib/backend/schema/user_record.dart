@@ -61,6 +61,11 @@ class UserRecord extends FirestoreRecord {
   DocumentReference? get privilegio => _privilegio;
   bool hasPrivilegio() => _privilegio != null;
 
+  // "Sugerencia" field.
+  String? _sugerencia;
+  String get sugerencia => _sugerencia ?? '';
+  bool hasSugerencia() => _sugerencia != null;
+
   void _initializeFields() {
     _email = snapshotData['email'] as String?;
     _displayName = snapshotData['display_name'] as String?;
@@ -71,6 +76,7 @@ class UserRecord extends FirestoreRecord {
     _rol = snapshotData['Rol'] as String?;
     _isAdmin = snapshotData['IsAdmin'] as bool?;
     _privilegio = snapshotData['privilegio'] as DocumentReference?;
+    _sugerencia = snapshotData['Sugerencia'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -116,6 +122,7 @@ Map<String, dynamic> createUserRecordData({
   String? rol,
   bool? isAdmin,
   DocumentReference? privilegio,
+  String? sugerencia,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -128,6 +135,7 @@ Map<String, dynamic> createUserRecordData({
       'Rol': rol,
       'IsAdmin': isAdmin,
       'privilegio': privilegio,
+      'Sugerencia': sugerencia,
     }.withoutNulls,
   );
 
@@ -147,7 +155,8 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e1?.phoneNumber == e2?.phoneNumber &&
         e1?.rol == e2?.rol &&
         e1?.isAdmin == e2?.isAdmin &&
-        e1?.privilegio == e2?.privilegio;
+        e1?.privilegio == e2?.privilegio &&
+        e1?.sugerencia == e2?.sugerencia;
   }
 
   @override
@@ -160,7 +169,8 @@ class UserRecordDocumentEquality implements Equality<UserRecord> {
         e?.phoneNumber,
         e?.rol,
         e?.isAdmin,
-        e?.privilegio
+        e?.privilegio,
+        e?.sugerencia
       ]);
 
   @override

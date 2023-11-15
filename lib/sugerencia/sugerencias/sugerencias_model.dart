@@ -1,17 +1,22 @@
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/pages/bts_notificacion_p_d_f/bts_notificacion_p_d_f_widget.dart';
-import 'envio_por_fechas_p_d_f_widget.dart' show EnvioPorFechasPDFWidget;
+import 'sugerencias_widget.dart' show SugerenciasWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EnvioPorFechasPDFModel extends FlutterFlowModel<EnvioPorFechasPDFWidget> {
+class SugerenciasModel extends FlutterFlowModel<SugerenciasWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for txtSugerencia widget.
+  FocusNode? txtSugerenciaFocusNode;
+  TextEditingController? txtSugerenciaController;
+  String? Function(BuildContext, String?)? txtSugerenciaControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -19,6 +24,8 @@ class EnvioPorFechasPDFModel extends FlutterFlowModel<EnvioPorFechasPDFWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    txtSugerenciaFocusNode?.dispose();
+    txtSugerenciaController?.dispose();
   }
 
   /// Action blocks are added here.
