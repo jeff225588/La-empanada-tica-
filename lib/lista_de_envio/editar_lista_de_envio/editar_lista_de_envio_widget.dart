@@ -1,6 +1,5 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_count_controller.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'editar_lista_de_envio_model.dart';
@@ -19,19 +17,10 @@ export 'editar_lista_de_envio_model.dart';
 class EditarListaDeEnvioWidget extends StatefulWidget {
   const EditarListaDeEnvioWidget({
     Key? key,
-    String? passProductosDescripcion,
-    required this.passProductoCantidad,
-    required this.pasProductoCateoria,
-    required this.passSucursal,
-    required this.passFechaEntrega,
-  })  : this.passProductosDescripcion = passProductosDescripcion ?? '1',
-        super(key: key);
+    required this.listaEnvio,
+  }) : super(key: key);
 
-  final String passProductosDescripcion;
-  final int? passProductoCantidad;
-  final String? pasProductoCateoria;
-  final String? passSucursal;
-  final DateTime? passFechaEntrega;
+  final ListaDiariaRecord? listaEnvio;
 
   @override
   _EditarListaDeEnvioWidgetState createState() =>
@@ -51,6 +40,22 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EditarListaDeEnvioModel());
+
+    _model.txtProductoController ??=
+        TextEditingController(text: widget.listaEnvio?.productosDescripcion);
+    _model.txtProductoFocusNode ??= FocusNode();
+
+    _model.txtCantidadController ??= TextEditingController(
+        text: formatNumber(
+      widget.listaEnvio?.productosCantidad,
+      formatType: FormatType.decimal,
+      decimalType: DecimalType.automatic,
+    ));
+    _model.txtCantidadFocusNode ??= FocusNode();
+
+    _model.txtCategoriaController ??=
+        TextEditingController(text: widget.listaEnvio?.productosCategoria);
+    _model.txtCategoriaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -125,35 +130,291 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Align(
-                                    alignment: AlignmentDirectional(0.00, 0.00),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 0.0, 5.0, 0.0),
-                                      child: Text(
-                                        'Producto:',
-                                        textAlign: TextAlign.start,
-                                        style: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: Color(0xFFBB0A2F),
-                                            ),
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: _model.txtProductoController,
+                                      focusNode: _model.txtProductoFocusNode,
+                                      autofocus: true,
+                                      readOnly: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Producto',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  Align(
-                                    alignment:
-                                        AlignmentDirectional(-1.00, 0.00),
-                                    child: Text(
-                                      widget.passProductosDescripcion,
-                                      textAlign: TextAlign.start,
                                       style: FlutterFlowTheme.of(context)
-                                          .titleSmall
+                                          .bodyMedium
                                           .override(
                                             fontFamily: 'Readex Pro',
                                             color: Color(0xFFBB0A2F),
+                                            fontSize: 16.0,
                                           ),
+                                      validator: _model
+                                          .txtProductoControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.00, 0.00),
+                child: Container(
+                  width: double.infinity,
+                  height: 60.0,
+                  decoration: BoxDecoration(),
+                  child: Align(
+                    alignment: AlignmentDirectional(0.00, 0.00),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 8.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: Color(0xFFF1F4F8),
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 8.0, 8.0, 8.0),
+                              child: Icon(
+                                Icons.add_shopping_cart_outlined,
+                                color: Color(0xFF57636C),
+                                size: 20.0,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: _model.txtCantidadController,
+                                      focusNode: _model.txtCantidadFocusNode,
+                                      autofocus: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Cantidad',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: Color(0xFFBB0A2F),
+                                            fontSize: 16.0,
+                                          ),
+                                      validator: _model
+                                          .txtCantidadControllerValidator
+                                          .asValidator(context),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.00, 0.00),
+                child: Container(
+                  width: double.infinity,
+                  height: 60.0,
+                  decoration: BoxDecoration(),
+                  child: Align(
+                    alignment: AlignmentDirectional(0.00, 0.00),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 8.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: Color(0xFFF1F4F8),
+                            elevation: 0.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  8.0, 8.0, 8.0, 8.0),
+                              child: Icon(
+                                Icons.category,
+                                color: Color(0xFF57636C),
+                                size: 20.0,
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  12.0, 0.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: TextFormField(
+                                      controller: _model.txtCategoriaController,
+                                      focusNode: _model.txtCategoriaFocusNode,
+                                      autofocus: true,
+                                      readOnly: true,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Categoría',
+                                        labelStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        hintStyle: FlutterFlowTheme.of(context)
+                                            .labelMedium,
+                                        enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .alternate,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primary,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        errorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        focusedErrorBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            width: 2.0,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: Color(0xFFBB0A2F),
+                                            fontSize: 16.0,
+                                          ),
+                                      validator: _model
+                                          .txtCategoriaControllerValidator
+                                          .asValidator(context),
                                     ),
                                   ),
                                 ],
@@ -213,7 +474,7 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                             .dropDownSeleccionarSucursalValueController ??=
                                         FormFieldController<String>(
                                       _model.dropDownSeleccionarSucursalValue ??=
-                                          'La Empanada Poás de Aserrí',
+                                          widget.listaEnvio?.sucursalDestino,
                                     ),
                                     options: ['La Empanada Poás de Aserrí'],
                                     onChanged: (val) => setState(() => _model
@@ -283,7 +544,7 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   8.0, 8.0, 8.0, 8.0),
                               child: Icon(
-                                Icons.storefront,
+                                Icons.calendar_month,
                                 color: Color(0xFF57636C),
                                 size: 20.0,
                               ),
@@ -303,243 +564,98 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                     Align(
                                       alignment:
                                           AlignmentDirectional(0.00, 0.00),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            10.0, 0.0, 10.0, 0.0),
-                                        child: FFButtonWidget(
-                                          onPressed: () async {
-                                            final _datePickedDate =
-                                                await showDatePicker(
-                                              context: context,
-                                              initialDate: getCurrentTimestamp,
-                                              firstDate: (DateTime
-                                                      .fromMicrosecondsSinceEpoch(
-                                                          946706400000000) ??
-                                                  DateTime(1900)),
-                                              lastDate: (DateTime
-                                                      .fromMicrosecondsSinceEpoch(
-                                                          4102380000000000) ??
-                                                  DateTime(2050)),
-                                              builder: (context, child) {
-                                                return wrapInMaterialDatePickerTheme(
-                                                  context,
-                                                  child!,
-                                                  headerBackgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                  headerForegroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .info,
-                                                  headerTextStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .headlineLarge
-                                                          .override(
-                                                            fontFamily:
-                                                                'Outfit',
-                                                            fontSize: 32.0,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                          ),
-                                                  pickerBackgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .secondaryBackground,
-                                                  pickerForegroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  selectedDateTimeBackgroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primary,
-                                                  selectedDateTimeForegroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .info,
-                                                  actionButtonForegroundColor:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .primaryText,
-                                                  iconSize: 24.0,
-                                                );
-                                              },
-                                            );
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          final _datePickedDate =
+                                              await showDatePicker(
+                                            context: context,
+                                            initialDate: getCurrentTimestamp,
+                                            firstDate: (DateTime
+                                                    .fromMicrosecondsSinceEpoch(
+                                                        946706400000000) ??
+                                                DateTime(1900)),
+                                            lastDate: (DateTime
+                                                    .fromMicrosecondsSinceEpoch(
+                                                        4102380000000000) ??
+                                                DateTime(2050)),
+                                            builder: (context, child) {
+                                              return wrapInMaterialDatePickerTheme(
+                                                context,
+                                                child!,
+                                                headerBackgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                headerForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                headerTextStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLarge
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          fontSize: 32.0,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                pickerBackgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                pickerForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                selectedDateTimeBackgroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                selectedDateTimeForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .info,
+                                                actionButtonForegroundColor:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryText,
+                                                iconSize: 24.0,
+                                              );
+                                            },
+                                          );
 
-                                            if (_datePickedDate != null) {
-                                              safeSetState(() {
-                                                _model.datePicked = DateTime(
-                                                  _datePickedDate.year,
-                                                  _datePickedDate.month,
-                                                  _datePickedDate.day,
-                                                );
-                                              });
-                                            }
-                                          },
-                                          text: valueOrDefault<String>(
-                                            dateTimeFormat(
-                                                'MMMMEEEEd', _model.datePicked),
-                                            'Fecha de Entrega...',
-                                          ),
-                                          icon: Icon(
-                                            Icons.date_range,
-                                            size: 15.0,
-                                          ),
-                                          options: FFButtonOptions(
-                                            height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    24.0, 0.0, 24.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: Color(0xFFDF2A00),
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Colors.white,
-                                                    ),
-                                            elevation: 3.0,
-                                            borderSide: BorderSide(
-                                              color: Colors.transparent,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                          ),
+                                          if (_datePickedDate != null) {
+                                            safeSetState(() {
+                                              _model.datePicked = DateTime(
+                                                _datePickedDate.year,
+                                                _datePickedDate.month,
+                                                _datePickedDate.day,
+                                              );
+                                            });
+                                          }
+                                        },
+                                        text: dateTimeFormat('MMMMEEEEd',
+                                            widget.listaEnvio!.fechaDeEntrega!),
+                                        icon: Icon(
+                                          Icons.date_range,
+                                          size: 15.0,
                                         ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Align(
-                alignment: AlignmentDirectional(0.00, 0.00),
-                child: Container(
-                  width: double.infinity,
-                  height: 60.0,
-                  decoration: BoxDecoration(),
-                  child: Align(
-                    alignment: AlignmentDirectional(0.00, 0.00),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          13.0, 13.0, 13.0, 13.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Card(
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            color: Color(0xFFF1F4F8),
-                            elevation: 0.0,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  8.0, 8.0, 8.0, 8.0),
-                              child: Icon(
-                                Icons.add_shopping_cart_outlined,
-                                color: Color(0xFF57636C),
-                                size: 20.0,
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: Align(
-                              alignment: AlignmentDirectional(0.00, 0.00),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    1.0, 0.0, 0.0, 0.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(-1.00, 0.00),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 0.0),
-                                        child: Text(
-                                          'Cantidad',
-                                          textAlign: TextAlign.start,
-                                          style: FlutterFlowTheme.of(context)
-                                              .labelLarge
-                                              .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF57636C),
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.normal,
-                                              ),
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.00, 0.00),
-                                      child: Container(
-                                        width: 150.0,
-                                        height: 50.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                        options: FFButtonOptions(
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  24.0, 0.0, 24.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: Color(0xFFDF2A00),
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Readex Pro',
+                                                    color: Colors.white,
+                                                  ),
+                                          elevation: 3.0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1.0,
+                                          ),
                                           borderRadius:
                                               BorderRadius.circular(8.0),
-                                          shape: BoxShape.rectangle,
-                                          border: Border.all(
-                                            color: FlutterFlowTheme.of(context)
-                                                .alternate,
-                                            width: 2.0,
-                                          ),
-                                        ),
-                                        child: FlutterFlowCountController(
-                                          decrementIconBuilder: (enabled) =>
-                                              FaIcon(
-                                            FontAwesomeIcons.minus,
-                                            color: enabled
-                                                ? FlutterFlowTheme.of(context)
-                                                    .secondaryText
-                                                : FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            size: 20.0,
-                                          ),
-                                          incrementIconBuilder: (enabled) =>
-                                              FaIcon(
-                                            FontAwesomeIcons.plus,
-                                            color: enabled
-                                                ? FlutterFlowTheme.of(context)
-                                                    .primary
-                                                : FlutterFlowTheme.of(context)
-                                                    .alternate,
-                                            size: 20.0,
-                                          ),
-                                          countBuilder: (count) => Text(
-                                            count.toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .titleLarge,
-                                          ),
-                                          count: _model
-                                              .countControllerUnidadesValue ??= 0,
-                                          updateCount: (count) => setState(() =>
-                                              _model.countControllerUnidadesValue =
-                                                  count),
-                                          stepSize: 1,
-                                          minimum: 0,
-                                          maximum: 99,
                                         ),
                                       ),
                                     ),
@@ -560,19 +676,8 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      await ListaDiariaRecord.collection
-                          .doc()
-                          .set(createListaDiariaRecordData(
-                            productosDescripcion:
-                                widget.passProductosDescripcion,
-                            productosCantidad:
-                                _model.countControllerUnidadesValue?.toDouble(),
-                            productosCategoria: widget.passCategoria,
-                            productosUnidad: widget.passUnidad,
-                            sucursalDestino:
-                                _model.dropDownSeleccionarSucursalValue,
-                            fechaDeEntrega: _model.datePicked,
-                          ));
+                      await currentUserReference!
+                          .update(createUserRecordData());
                       Navigator.pop(context);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -590,7 +695,7 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                     },
                     text: 'Editar Lista de Envío',
                     icon: Icon(
-                      Icons.add_shopping_cart,
+                      Icons.mode_edit,
                       size: 15.0,
                     ),
                     options: FFButtonOptions(
@@ -600,6 +705,42 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                       iconPadding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: Color(0xFFDF2A00),
+                      textStyle:
+                          FlutterFlowTheme.of(context).titleSmall.override(
+                                fontFamily: 'Readex Pro',
+                                color: Colors.white,
+                              ),
+                      elevation: 3.0,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.00, 0.00),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  child: FFButtonWidget(
+                    onPressed: () async {
+                      context.safePop();
+                    },
+                    text: 'Cancelar',
+                    icon: Icon(
+                      Icons.arrow_back_sharp,
+                      size: 15.0,
+                    ),
+                    options: FFButtonOptions(
+                      width: 240.0,
+                      height: 40.0,
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      iconPadding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: FlutterFlowTheme.of(context).secondaryText,
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Readex Pro',

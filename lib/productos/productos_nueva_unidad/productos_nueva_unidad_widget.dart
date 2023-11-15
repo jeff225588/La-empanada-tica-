@@ -63,7 +63,7 @@ class _ProductosNuevaUnidadWidgetState
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color(0xFFDF2A00),
+          backgroundColor: Color(0xFF86080D),
           automaticallyImplyLeading: false,
           title: Text(
             'Ingresar Nueva Unidad',

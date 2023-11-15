@@ -106,7 +106,7 @@ class _EditarusuarioWidgetState extends State<EditarusuarioWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: AppBar(
-              backgroundColor: FlutterFlowTheme.of(context).primary,
+              backgroundColor: Color(0xFF86080D),
               automaticallyImplyLeading: false,
               leading: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
@@ -324,7 +324,7 @@ class _EditarusuarioWidgetState extends State<EditarusuarioWidget> {
                               24.0, 0.0, 24.0, 0.0),
                           iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
+                          color: Color(0xFF86080D),
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
                                     fontFamily: 'Readex Pro',
