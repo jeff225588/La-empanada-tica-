@@ -2,14 +2,16 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'sugerencias_widget.dart' show SugerenciasWidget;
+import '/sugerencia/h29_nueva_sugerencia_o_volver/h29_nueva_sugerencia_o_volver_widget.dart';
+import 'h29_envia_sugerencias_widget.dart' show H29EnviaSugerenciasWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SugerenciasModel extends FlutterFlowModel<SugerenciasWidget> {
+class H29EnviaSugerenciasModel
+    extends FlutterFlowModel<H29EnviaSugerenciasWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

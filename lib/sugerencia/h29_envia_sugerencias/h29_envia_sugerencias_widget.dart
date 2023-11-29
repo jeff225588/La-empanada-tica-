@@ -2,30 +2,32 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/sugerencia/h29_nueva_sugerencia_o_volver/h29_nueva_sugerencia_o_volver_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'envia_sugerencia_model.dart';
-export 'envia_sugerencia_model.dart';
+import 'h29_envia_sugerencias_model.dart';
+export 'h29_envia_sugerencias_model.dart';
 
-class EnviaSugerenciaWidget extends StatefulWidget {
-  const EnviaSugerenciaWidget({Key? key}) : super(key: key);
+class H29EnviaSugerenciasWidget extends StatefulWidget {
+  const H29EnviaSugerenciasWidget({Key? key}) : super(key: key);
 
   @override
-  _EnviaSugerenciaWidgetState createState() => _EnviaSugerenciaWidgetState();
+  _H29EnviaSugerenciasWidgetState createState() =>
+      _H29EnviaSugerenciasWidgetState();
 }
 
-class _EnviaSugerenciaWidgetState extends State<EnviaSugerenciaWidget> {
-  late EnviaSugerenciaModel _model;
+class _H29EnviaSugerenciasWidgetState extends State<H29EnviaSugerenciasWidget> {
+  late H29EnviaSugerenciasModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EnviaSugerenciaModel());
+    _model = createModel(context, () => H29EnviaSugerenciasModel());
 
     _model.txtSugerenciaController ??= TextEditingController();
     _model.txtSugerenciaFocusNode ??= FocusNode();
@@ -93,7 +95,7 @@ class _EnviaSugerenciaWidgetState extends State<EnviaSugerenciaWidget> {
                                 size: 30.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed('loginuser');
+                                context.pushNamed('H2-IniciarSesionAdmin');
                               },
                             ),
                           ),
@@ -234,11 +236,30 @@ class _EnviaSugerenciaWidgetState extends State<EnviaSugerenciaWidget> {
                             query: {
                               'subject':
                                   'Sugerencia Aplicación La Empanada Alajauelita',
+                              'body': _model.txtSugerenciaController.text,
                             }
                                 .entries
                                 .map((MapEntry<String, String> e) =>
                                     '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
                                 .join('&')));
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () => _model.unfocusNode.canRequestFocus
+                                  ? FocusScope.of(context)
+                                      .requestFocus(_model.unfocusNode)
+                                  : FocusScope.of(context).unfocus(),
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: H29NuevaSugerenciaOVolverWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
                       },
                       text: 'Enviar',
                       options: FFButtonOptions(

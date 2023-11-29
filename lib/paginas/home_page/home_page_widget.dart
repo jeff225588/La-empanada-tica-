@@ -90,22 +90,25 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 size: 30.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed('loginuser');
+                                context.pushNamed('H2-IniciarSesionAdmin');
                               },
                             ),
                           ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 0.0, 0.0),
-                            child: Text(
-                              'La Empanada Alajuelita',
-                              style: FlutterFlowTheme.of(context)
-                                  .headlineMedium
-                                  .override(
-                                    fontFamily: 'Outfit',
-                                    color: Colors.white,
-                                    fontSize: 22.0,
-                                  ),
+                          Align(
+                            alignment: AlignmentDirectional(0.00, 0.00),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 0.0, 0.0),
+                              child: Text(
+                                'La Empanada Alajuelita',
+                                style: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .override(
+                                      fontFamily: 'Outfit',
+                                      color: Colors.white,
+                                      fontSize: 22.0,
+                                    ),
+                              ),
                             ),
                           ),
                         ],
@@ -128,7 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             children: [
               Container(
                 width: 336.0,
-                height: 191.0,
+                height: 99.0,
                 decoration: BoxDecoration(
                   color: Color(0xFF68010F),
                 ),
@@ -152,10 +155,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     children: [
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            10.0, 10.0, 10.0, 0.0),
+                            10.0, 10.0, 10.0, 5.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('productos');
+                            context.pushNamed('H5-H6-FiltrarBuscarProducto');
                           },
                           text: 'Productos',
                           options: FFButtonOptions(
@@ -185,7 +188,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             10.0, 10.0, 10.0, 0.0),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('ResumenListaDeEnvio');
+                            context.pushNamed('H4-H10-ResumenLista');
                           },
                           text: 'Lista de Envío',
                           options: FFButtonOptions(
@@ -218,10 +221,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           children: [
                             Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 10.0, 10.0, 0.0),
+                                  10.0, 5.0, 10.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('ResumenListaDeEnvio');
+                                  context.pushNamed('H29-EnviaSugerencias');
                                 },
                                 text: 'Sugerencias',
                                 options: FFButtonOptions(
@@ -264,7 +267,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       child: AuthUserStreamWidget(
                         builder: (context) => FFButtonWidget(
                           onPressed: () async {
-                            context.pushNamed('loginlaEmpanadaAlajuelita');
+                            context.pushNamed('H1-CrearCuentaUsuario');
                           },
                           text: 'Crear usuario',
                           options: FFButtonOptions(

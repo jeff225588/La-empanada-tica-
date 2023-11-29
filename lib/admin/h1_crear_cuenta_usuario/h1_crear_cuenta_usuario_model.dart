@@ -2,15 +2,14 @@ import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'loginla_empanada_alajuelita_widget.dart'
-    show LoginlaEmpanadaAlajuelitaWidget;
+import 'h1_crear_cuenta_usuario_widget.dart' show H1CrearCuentaUsuarioWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class LoginlaEmpanadaAlajuelitaModel
-    extends FlutterFlowModel<LoginlaEmpanadaAlajuelitaWidget> {
+class H1CrearCuentaUsuarioModel
+    extends FlutterFlowModel<H1CrearCuentaUsuarioWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

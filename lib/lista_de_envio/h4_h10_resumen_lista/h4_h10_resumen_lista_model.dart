@@ -1,22 +1,18 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'envia_sugerencia_widget.dart' show EnviaSugerenciaWidget;
+import '/lista_de_envio/editar_lista_de_envio/editar_lista_de_envio_widget.dart';
+import 'h4_h10_resumen_lista_widget.dart' show H4H10ResumenListaWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
-class EnviaSugerenciaModel extends FlutterFlowModel<EnviaSugerenciaWidget> {
+class H4H10ResumenListaModel extends FlutterFlowModel<H4H10ResumenListaWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for txtSugerencia widget.
-  FocusNode? txtSugerenciaFocusNode;
-  TextEditingController? txtSugerenciaController;
-  String? Function(BuildContext, String?)? txtSugerenciaControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -24,8 +20,6 @@ class EnviaSugerenciaModel extends FlutterFlowModel<EnviaSugerenciaWidget> {
 
   void dispose() {
     unfocusNode.dispose();
-    txtSugerenciaFocusNode?.dispose();
-    txtSugerenciaController?.dispose();
   }
 
   /// Action blocks are added here.

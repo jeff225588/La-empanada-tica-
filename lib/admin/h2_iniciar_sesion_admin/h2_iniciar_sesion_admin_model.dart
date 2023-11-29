@@ -4,7 +4,7 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'loginuser_widget.dart' show LoginuserWidget;
+import 'h2_iniciar_sesion_admin_widget.dart' show H2IniciarSesionAdminWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +12,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class LoginuserModel extends FlutterFlowModel<LoginuserWidget> {
+class H2IniciarSesionAdminModel
+    extends FlutterFlowModel<H2IniciarSesionAdminWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

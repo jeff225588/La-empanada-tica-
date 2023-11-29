@@ -1,32 +1,34 @@
 import '/backend/backend.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/paginas/bts_notificacion_p_d_f/bts_notificacion_p_d_f_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'envio_por_fechas_p_d_f_model.dart';
-export 'envio_por_fechas_p_d_f_model.dart';
+import 'envio_por_fechas_c_s_v_model.dart';
+export 'envio_por_fechas_c_s_v_model.dart';
 
-class EnvioPorFechasPDFWidget extends StatefulWidget {
-  const EnvioPorFechasPDFWidget({Key? key}) : super(key: key);
+class EnvioPorFechasCSVWidget extends StatefulWidget {
+  const EnvioPorFechasCSVWidget({Key? key}) : super(key: key);
 
   @override
-  _EnvioPorFechasPDFWidgetState createState() =>
-      _EnvioPorFechasPDFWidgetState();
+  _EnvioPorFechasCSVWidgetState createState() =>
+      _EnvioPorFechasCSVWidgetState();
 }
 
-class _EnvioPorFechasPDFWidgetState extends State<EnvioPorFechasPDFWidget> {
-  late EnvioPorFechasPDFModel _model;
+class _EnvioPorFechasCSVWidgetState extends State<EnvioPorFechasCSVWidget> {
+  late EnvioPorFechasCSVModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EnvioPorFechasPDFModel());
+    _model = createModel(context, () => EnvioPorFechasCSVModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -59,6 +61,20 @@ class _EnvioPorFechasPDFWidgetState extends State<EnvioPorFechasPDFWidget> {
         appBar: AppBar(
           backgroundColor: Color(0xFF86080D),
           automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.logout,
+              color: Colors.white,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
           title: Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
             child: Text(
@@ -70,40 +86,9 @@ class _EnvioPorFechasPDFWidgetState extends State<EnvioPorFechasPDFWidget> {
                   ),
             ),
           ),
-          actions: [
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 10.0, 10.0),
-              child: FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
-                },
-                text: 'Resumen',
-                icon: Icon(
-                  Icons.picture_as_pdf,
-                  size: 15.0,
-                ),
-                options: FFButtonOptions(
-                  height: 40.0,
-                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 15.0, 0.0),
-                  iconPadding:
-                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: Colors.black,
-                  textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                        fontFamily: 'Readex Pro',
-                        color: Color(0xFF86080D),
-                      ),
-                  elevation: 3.0,
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                    width: 1.0,
-                  ),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),
-            ),
-          ],
+          actions: [],
           centerTitle: true,
-          elevation: 0.0,
+          elevation: 2.0,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -233,9 +218,8 @@ class _EnvioPorFechasPDFWidgetState extends State<EnvioPorFechasPDFWidget> {
                                                   safeSetState(() {}));
                                             },
                                             text: '',
-                                            icon: Icon(
-                                              Icons.picture_as_pdf,
-                                              size: 15.0,
+                                            icon: FaIcon(
+                                              FontAwesomeIcons.fileCsv,
                                             ),
                                             options: FFButtonOptions(
                                               width: 70.0,

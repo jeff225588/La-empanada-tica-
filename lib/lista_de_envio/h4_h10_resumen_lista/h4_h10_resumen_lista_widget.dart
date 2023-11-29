@@ -7,26 +7,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'resumen_lista_de_envio_model.dart';
-export 'resumen_lista_de_envio_model.dart';
+import 'h4_h10_resumen_lista_model.dart';
+export 'h4_h10_resumen_lista_model.dart';
 
-class ResumenListaDeEnvioWidget extends StatefulWidget {
-  const ResumenListaDeEnvioWidget({Key? key}) : super(key: key);
+class H4H10ResumenListaWidget extends StatefulWidget {
+  const H4H10ResumenListaWidget({Key? key}) : super(key: key);
 
   @override
-  _ResumenListaDeEnvioWidgetState createState() =>
-      _ResumenListaDeEnvioWidgetState();
+  _H4H10ResumenListaWidgetState createState() =>
+      _H4H10ResumenListaWidgetState();
 }
 
-class _ResumenListaDeEnvioWidgetState extends State<ResumenListaDeEnvioWidget> {
-  late ResumenListaDeEnvioModel _model;
+class _H4H10ResumenListaWidgetState extends State<H4H10ResumenListaWidget> {
+  late H4H10ResumenListaModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ResumenListaDeEnvioModel());
+    _model = createModel(context, () => H4H10ResumenListaModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -521,6 +521,11 @@ class _ResumenListaDeEnvioWidgetState extends State<ResumenListaDeEnvioWidget> {
                                                   Column(
                                                     mainAxisSize:
                                                         MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
                                                     children: [
                                                       InkWell(
                                                         splashColor:
@@ -581,7 +586,7 @@ class _ResumenListaDeEnvioWidgetState extends State<ResumenListaDeEnvioWidget> {
                                                             EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
-                                                                    20.0,
+                                                                    30.0,
                                                                     0.0,
                                                                     0.0),
                                                         child: InkWell(
@@ -671,7 +676,7 @@ class _ResumenListaDeEnvioWidgetState extends State<ResumenListaDeEnvioWidget> {
                           ],
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.00, 0.00),
+                          alignment: AlignmentDirectional(0.00, 0.00),
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 10.0, 10.0, 10.0, 5.0),

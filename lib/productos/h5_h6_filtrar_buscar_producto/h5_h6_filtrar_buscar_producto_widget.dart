@@ -3,31 +3,33 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/productos/productos_agregar_a_listadeenvio/productos_agregar_a_listadeenvio_widget.dart';
+import '/productos/h7_agregar_productos/h7_agregar_productos_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:text_search/text_search.dart';
-import 'productos_model.dart';
-export 'productos_model.dart';
+import 'h5_h6_filtrar_buscar_producto_model.dart';
+export 'h5_h6_filtrar_buscar_producto_model.dart';
 
-class ProductosWidget extends StatefulWidget {
-  const ProductosWidget({Key? key}) : super(key: key);
+class H5H6FiltrarBuscarProductoWidget extends StatefulWidget {
+  const H5H6FiltrarBuscarProductoWidget({Key? key}) : super(key: key);
 
   @override
-  _ProductosWidgetState createState() => _ProductosWidgetState();
+  _H5H6FiltrarBuscarProductoWidgetState createState() =>
+      _H5H6FiltrarBuscarProductoWidgetState();
 }
 
-class _ProductosWidgetState extends State<ProductosWidget> {
-  late ProductosModel _model;
+class _H5H6FiltrarBuscarProductoWidgetState
+    extends State<H5H6FiltrarBuscarProductoWidget> {
+  late H5H6FiltrarBuscarProductoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProductosModel());
+    _model = createModel(context, () => H5H6FiltrarBuscarProductoModel());
 
     _model.textFieldBusquedaController ??= TextEditingController();
     _model.textFieldBusquedaFocusNode ??= FocusNode();
@@ -290,7 +292,7 @@ class _ProductosWidgetState extends State<ProductosWidget> {
                                                                       .height *
                                                                   0.5,
                                                           child:
-                                                              ProductosAgregarAListadeenvioWidget(
+                                                              H7AgregarProductosWidget(
                                                             passProductosDescripcion:
                                                                 valueOrDefault<
                                                                     String>(

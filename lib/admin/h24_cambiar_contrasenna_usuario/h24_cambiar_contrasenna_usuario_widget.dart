@@ -10,19 +10,21 @@ import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'loginuser_model.dart';
-export 'loginuser_model.dart';
+import 'h24_cambiar_contrasenna_usuario_model.dart';
+export 'h24_cambiar_contrasenna_usuario_model.dart';
 
-class LoginuserWidget extends StatefulWidget {
-  const LoginuserWidget({Key? key}) : super(key: key);
+class H24CambiarContrasennaUsuarioWidget extends StatefulWidget {
+  const H24CambiarContrasennaUsuarioWidget({Key? key}) : super(key: key);
 
   @override
-  _LoginuserWidgetState createState() => _LoginuserWidgetState();
+  _H24CambiarContrasennaUsuarioWidgetState createState() =>
+      _H24CambiarContrasennaUsuarioWidgetState();
 }
 
-class _LoginuserWidgetState extends State<LoginuserWidget>
+class _H24CambiarContrasennaUsuarioWidgetState
+    extends State<H24CambiarContrasennaUsuarioWidget>
     with TickerProviderStateMixin {
-  late LoginuserModel _model;
+  late H24CambiarContrasennaUsuarioModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -79,7 +81,7 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginuserModel());
+    _model = createModel(context, () => H24CambiarContrasennaUsuarioModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -87,8 +89,8 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
 
       final user = await authManager.signInWithEmail(
         context,
-        _model.emailAddressController.text,
-        _model.passwordController.text,
+        _model.correoUsuarioController.text,
+        _model.contrasennaUsuarioController.text,
       );
       if (user == null) {
         return;
@@ -102,11 +104,14 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
       length: 1,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.emailAddressController ??= TextEditingController();
-    _model.emailAddressFocusNode ??= FocusNode();
+    _model.correoUsuarioController ??= TextEditingController();
+    _model.correoUsuarioFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
-    _model.passwordFocusNode ??= FocusNode();
+    _model.contrasennaUsuarioController ??= TextEditingController();
+    _model.contrasennaUsuarioFocusNode ??= FocusNode();
+
+    _model.txtverificarcontrasennaController ??= TextEditingController();
+    _model.txtverificarcontrasennaFocusNode ??= FocusNode();
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -145,7 +150,7 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 0.0, 16.0),
                 child: Text(
-                  'La Empanada Alajuelita',
+                  'Restablecer Contraseña',
                   textAlign: TextAlign.center,
                   style: FlutterFlowTheme.of(context).displaySmall.override(
                         fontFamily: 'Plus Jakarta Sans',
@@ -188,7 +193,7 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                            CrossAxisAlignment.center,
                                         children: [
                                           if (responsiveVisibility(
                                             context: context,
@@ -210,16 +215,17 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                               width: double.infinity,
                                               child: TextFormField(
                                                 controller: _model
-                                                    .emailAddressController,
+                                                    .correoUsuarioController,
                                                 focusNode: _model
-                                                    .emailAddressFocusNode,
+                                                    .correoUsuarioFocusNode,
                                                 autofocus: true,
                                                 autofillHints: [
                                                   AutofillHints.email
                                                 ],
                                                 obscureText: false,
                                                 decoration: InputDecoration(
-                                                  labelText: 'Email',
+                                                  labelText:
+                                                      'Correo Electrónico',
                                                   labelStyle: FlutterFlowTheme
                                                           .of(context)
                                                       .labelLarge
@@ -294,7 +300,7 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                                 keyboardType:
                                                     TextInputType.emailAddress,
                                                 validator: _model
-                                                    .emailAddressControllerValidator
+                                                    .correoUsuarioControllerValidator
                                                     .asValidator(context),
                                               ),
                                             ),
@@ -306,18 +312,18 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                             child: Container(
                                               width: double.infinity,
                                               child: TextFormField(
-                                                controller:
-                                                    _model.passwordController,
-                                                focusNode:
-                                                    _model.passwordFocusNode,
+                                                controller: _model
+                                                    .contrasennaUsuarioController,
+                                                focusNode: _model
+                                                    .contrasennaUsuarioFocusNode,
                                                 autofocus: true,
                                                 autofillHints: [
                                                   AutofillHints.password
                                                 ],
-                                                obscureText:
-                                                    !_model.passwordVisibility,
+                                                obscureText: !_model
+                                                    .contrasennaUsuarioVisibility,
                                                 decoration: InputDecoration(
-                                                  labelText: 'Password',
+                                                  labelText: 'Contraseña',
                                                   labelStyle: FlutterFlowTheme
                                                           .of(context)
                                                       .labelLarge
@@ -379,14 +385,14 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                                   suffixIcon: InkWell(
                                                     onTap: () => setState(
                                                       () => _model
-                                                              .passwordVisibility =
+                                                              .contrasennaUsuarioVisibility =
                                                           !_model
-                                                              .passwordVisibility,
+                                                              .contrasennaUsuarioVisibility,
                                                     ),
                                                     focusNode: FocusNode(
                                                         skipTraversal: true),
                                                     child: Icon(
-                                                      _model.passwordVisibility
+                                                      _model.contrasennaUsuarioVisibility
                                                           ? Icons
                                                               .visibility_outlined
                                                           : Icons
@@ -409,7 +415,123 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                                               FontWeight.w500,
                                                         ),
                                                 validator: _model
-                                                    .passwordControllerValidator
+                                                    .contrasennaUsuarioControllerValidator
+                                                    .asValidator(context),
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 16.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              child: TextFormField(
+                                                controller: _model
+                                                    .txtverificarcontrasennaController,
+                                                focusNode: _model
+                                                    .txtverificarcontrasennaFocusNode,
+                                                autofocus: true,
+                                                autofillHints: [
+                                                  AutofillHints.password
+                                                ],
+                                                obscureText: !_model
+                                                    .txtverificarcontrasennaVisibility,
+                                                decoration: InputDecoration(
+                                                  labelText:
+                                                      'VerificarContraseña',
+                                                  labelStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .labelLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Plus Jakarta Sans',
+                                                        color:
+                                                            Color(0xFF57636C),
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0xFFE0E3E7),
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0xFF4B39EF),
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  errorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0xFFFF5963),
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  focusedErrorBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: Color(0xFFFF5963),
+                                                      width: 2.0,
+                                                    ),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            40.0),
+                                                  ),
+                                                  filled: true,
+                                                  fillColor: Colors.white,
+                                                  contentPadding:
+                                                      EdgeInsetsDirectional
+                                                          .fromSTEB(24.0, 24.0,
+                                                              0.0, 24.0),
+                                                  suffixIcon: InkWell(
+                                                    onTap: () => setState(
+                                                      () => _model
+                                                              .txtverificarcontrasennaVisibility =
+                                                          !_model
+                                                              .txtverificarcontrasennaVisibility,
+                                                    ),
+                                                    focusNode: FocusNode(
+                                                        skipTraversal: true),
+                                                    child: Icon(
+                                                      _model.txtverificarcontrasennaVisibility
+                                                          ? Icons
+                                                              .visibility_outlined
+                                                          : Icons
+                                                              .visibility_off_outlined,
+                                                      color: Color(0xFF57636C),
+                                                      size: 24.0,
+                                                    ),
+                                                  ),
+                                                ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .override(
+                                                          fontFamily:
+                                                              'Plus Jakarta Sans',
+                                                          color:
+                                                              Color(0xFF101213),
+                                                          fontSize: 16.0,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                validator: _model
+                                                    .txtverificarcontrasennaControllerValidator
                                                     .asValidator(context),
                                               ),
                                             ),
@@ -430,9 +552,10 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                                       .signInWithEmail(
                                                     context,
                                                     _model
-                                                        .emailAddressController
+                                                        .correoUsuarioController
                                                         .text,
-                                                    _model.passwordController
+                                                    _model
+                                                        .contrasennaUsuarioController
                                                         .text,
                                                   );
                                                   if (user == null) {
@@ -443,7 +566,7 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                                       'HomePage',
                                                       context.mounted);
                                                 },
-                                                text: 'Iniciar',
+                                                text: 'Cambiar Contraseña',
                                                 options: FFButtonOptions(
                                                   width: 230.0,
                                                   height: 52.0,
@@ -483,19 +606,9 @@ class _LoginuserWidgetState extends State<LoginuserWidget>
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
                                             child: Image.asset(
-                                              'assets/images/840_560.jpg',
-                                              width: 300.0,
-                                              height: 140.0,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
-                                            child: Image.asset(
                                               'assets/images/La_Empanada_Alajuelita.jpg',
-                                              width: 300.0,
-                                              height: 232.0,
+                                              width: 272.0,
+                                              height: 265.0,
                                               fit: BoxFit.cover,
                                             ),
                                           ),

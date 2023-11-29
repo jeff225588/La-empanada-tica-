@@ -106,7 +106,7 @@ class _BtsNotificacionPDFWidgetState extends State<BtsNotificacionPDFWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Enviar PDF por correo electrónico',
+                                      'Enviar CVS por correo electrónico',
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
@@ -172,7 +172,7 @@ class _BtsNotificacionPDFWidgetState extends State<BtsNotificacionPDFWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Descargar PDF',
+                                      'Descargar CSV',
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(

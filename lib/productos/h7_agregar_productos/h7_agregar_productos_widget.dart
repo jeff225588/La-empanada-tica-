@@ -13,11 +13,11 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'productos_agregar_a_listadeenvio_model.dart';
-export 'productos_agregar_a_listadeenvio_model.dart';
+import 'h7_agregar_productos_model.dart';
+export 'h7_agregar_productos_model.dart';
 
-class ProductosAgregarAListadeenvioWidget extends StatefulWidget {
-  const ProductosAgregarAListadeenvioWidget({
+class H7AgregarProductosWidget extends StatefulWidget {
+  const H7AgregarProductosWidget({
     Key? key,
     String? passProductosDescripcion,
     String? passCategoria,
@@ -31,13 +31,12 @@ class ProductosAgregarAListadeenvioWidget extends StatefulWidget {
   final String? passUnidad;
 
   @override
-  _ProductosAgregarAListadeenvioWidgetState createState() =>
-      _ProductosAgregarAListadeenvioWidgetState();
+  _H7AgregarProductosWidgetState createState() =>
+      _H7AgregarProductosWidgetState();
 }
 
-class _ProductosAgregarAListadeenvioWidgetState
-    extends State<ProductosAgregarAListadeenvioWidget> {
-  late ProductosAgregarAListadeenvioModel _model;
+class _H7AgregarProductosWidgetState extends State<H7AgregarProductosWidget> {
+  late H7AgregarProductosModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -48,7 +47,7 @@ class _ProductosAgregarAListadeenvioWidgetState
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ProductosAgregarAListadeenvioModel());
+    _model = createModel(context, () => H7AgregarProductosModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }

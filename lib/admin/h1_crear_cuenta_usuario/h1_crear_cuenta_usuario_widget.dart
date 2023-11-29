@@ -6,27 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'loginla_empanada_alajuelita_model.dart';
-export 'loginla_empanada_alajuelita_model.dart';
+import 'h1_crear_cuenta_usuario_model.dart';
+export 'h1_crear_cuenta_usuario_model.dart';
 
-class LoginlaEmpanadaAlajuelitaWidget extends StatefulWidget {
-  const LoginlaEmpanadaAlajuelitaWidget({Key? key}) : super(key: key);
+class H1CrearCuentaUsuarioWidget extends StatefulWidget {
+  const H1CrearCuentaUsuarioWidget({Key? key}) : super(key: key);
 
   @override
-  _LoginlaEmpanadaAlajuelitaWidgetState createState() =>
-      _LoginlaEmpanadaAlajuelitaWidgetState();
+  _H1CrearCuentaUsuarioWidgetState createState() =>
+      _H1CrearCuentaUsuarioWidgetState();
 }
 
-class _LoginlaEmpanadaAlajuelitaWidgetState
-    extends State<LoginlaEmpanadaAlajuelitaWidget> {
-  late LoginlaEmpanadaAlajuelitaModel _model;
+class _H1CrearCuentaUsuarioWidgetState
+    extends State<H1CrearCuentaUsuarioWidget> {
+  late H1CrearCuentaUsuarioModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => LoginlaEmpanadaAlajuelitaModel());
+    _model = createModel(context, () => H1CrearCuentaUsuarioModel());
 
     _model.txtCorreoController ??= TextEditingController();
     _model.txtCorreoFocusNode ??= FocusNode();
@@ -330,7 +330,7 @@ class _LoginlaEmpanadaAlajuelitaWidgetState
                                             obscureText:
                                                 !_model.txtPassword1Visibility,
                                             decoration: InputDecoration(
-                                              labelText: 'Contraseña',
+                                              labelText: 'Confirmar Contraseña',
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .labelLarge,

@@ -78,14 +78,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : LoginuserWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? HomePageWidget()
+          : H2IniciarSesionAdminWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomePageWidget() : LoginuserWidget(),
+          builder: (context, _) => appStateNotifier.loggedIn
+              ? HomePageWidget()
+              : H2IniciarSesionAdminWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -93,19 +95,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => HomePageWidget(),
         ),
         FFRoute(
-          name: 'loginlaEmpanadaAlajuelita',
-          path: '/loginlaEmpanadaAlajuelita',
-          builder: (context, params) => LoginlaEmpanadaAlajuelitaWidget(),
+          name: 'H1-CrearCuentaUsuario',
+          path: '/h1CrearCuentaUsuario',
+          builder: (context, params) => H1CrearCuentaUsuarioWidget(),
         ),
         FFRoute(
-          name: 'productos',
-          path: '/productos',
-          builder: (context, params) => ProductosWidget(),
+          name: 'H5-H6-FiltrarBuscarProducto',
+          path: '/h5H6FiltrarBuscarProducto',
+          builder: (context, params) => H5H6FiltrarBuscarProductoWidget(),
         ),
         FFRoute(
-          name: 'envioPorFechasPDF',
-          path: '/envioPorFechasPDF',
-          builder: (context, params) => EnvioPorFechasPDFWidget(),
+          name: 'EnvioPorFechasCSV',
+          path: '/envioPorFechasCSV',
+          builder: (context, params) => EnvioPorFechasCSVWidget(),
         ),
         FFRoute(
           name: 'enviosPorSucursal',
@@ -147,26 +149,24 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => EditarListaEnvioWidget(),
         ),
         FFRoute(
-          name: 'ResumenListaDeEnvio',
-          path: '/resumenListaDeEnvio',
-          builder: (context, params) => ResumenListaDeEnvioWidget(),
+          name: 'H4-H10-ResumenLista',
+          path: '/h4H10ResumenLista',
+          builder: (context, params) => H4H10ResumenListaWidget(),
         ),
         FFRoute(
-          name: 'loginuser',
-          path: '/loginuser',
-          builder: (context, params) => LoginuserWidget(),
+          name: 'H2-IniciarSesionAdmin',
+          path: '/h2IniciarSesionAdmin',
+          builder: (context, params) => H2IniciarSesionAdminWidget(),
         ),
         FFRoute(
-          name: 'Sugerencias',
-          path: '/sugerencias',
-          builder: (context, params) => SugerenciasWidget(
-            sugerencia: params.getParam('sugerencia', ParamType.String),
-          ),
+          name: 'H29-EnviaSugerencias',
+          path: '/h29EnviaSugerencias',
+          builder: (context, params) => H29EnviaSugerenciasWidget(),
         ),
         FFRoute(
-          name: 'EnviaSugerencia',
-          path: '/enviaSugerencia',
-          builder: (context, params) => EnviaSugerenciaWidget(),
+          name: 'H24-CambiarContrasennaUsuario',
+          path: '/h24CambiarContrasennaUsuario',
+          builder: (context, params) => H24CambiarContrasennaUsuarioWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -333,7 +333,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/loginuser';
+            return '/h2IniciarSesionAdmin';
           }
           return null;
         },
