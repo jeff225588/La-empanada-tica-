@@ -58,7 +58,7 @@ class _H4H10ResumenListaWidgetState extends State<H4H10ResumenListaWidget> {
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
-          backgroundColor: Color(0xFFD31315),
+          backgroundColor: Color(0xFF86080D),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,

@@ -65,7 +65,7 @@ class _AdmindeusuariosWidgetState extends State<AdmindeusuariosWidget> {
             borderWidth: 1.0,
             buttonSize: 60.0,
             icon: Icon(
-              Icons.logout,
+              Icons.arrow_back,
               color: Colors.white,
               size: 30.0,
             ),
@@ -74,7 +74,7 @@ class _AdmindeusuariosWidgetState extends State<AdmindeusuariosWidget> {
               await authManager.signOut();
               GoRouter.of(context).clearRedirectLocation();
 
-              context.goNamedAuth('H2-IniciarSesionAdminCopy', context.mounted);
+              context.goNamedAuth('H2-IniciarSesionAdmin', context.mounted);
             },
           ),
           title: Text(

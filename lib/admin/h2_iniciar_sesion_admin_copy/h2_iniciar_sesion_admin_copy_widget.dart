@@ -385,6 +385,15 @@ class _H2IniciarSesionAdminCopyWidgetState
                       animationsMap['columnOnPageLoadAnimation']!),
                 ),
               ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/images/La_Empanada_Alajuelita.jpg',
+                  width: 272.0,
+                  height: 265.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ],
           ),
         ),

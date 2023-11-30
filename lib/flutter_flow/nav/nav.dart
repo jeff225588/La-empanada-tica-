@@ -80,14 +80,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
           ? HomePageWidget()
-          : H2IniciarSesionAdminCopyWidget(),
+          : H2IniciarSesionAdminWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? HomePageWidget()
-              : H2IniciarSesionAdminCopyWidget(),
+              : H2IniciarSesionAdminWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -338,7 +338,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/h2IniciarSesionAdminCopy';
+            return '/h2IniciarSesionAdmin';
           }
           return null;
         },

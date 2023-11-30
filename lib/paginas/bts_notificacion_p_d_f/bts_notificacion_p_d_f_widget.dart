@@ -106,7 +106,7 @@ class _BtsNotificacionPDFWidgetState extends State<BtsNotificacionPDFWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Enviar CVS por correo electrónico',
+                                      'Enviar CSV por correo electrónico',
                                       style: FlutterFlowTheme.of(context)
                                           .labelLarge
                                           .override(
