@@ -90,7 +90,7 @@ class _H29EnviaSugerenciasWidgetState extends State<H29EnviaSugerenciasWidget> {
                               borderWidth: 1.0,
                               buttonSize: 40.0,
                               icon: Icon(
-                                Icons.logout,
+                                Icons.arrow_back,
                                 color: Colors.white,
                                 size: 30.0,
                               ),

@@ -1,19 +1,27 @@
-import '/backend/backend.dart';
+import '/auth/firebase_auth/auth_util.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/lista_de_envio/editar_lista_de_envio/editar_lista_de_envio_widget.dart';
-import 'h4_h10_resumen_lista_widget.dart' show H4H10ResumenListaWidget;
+import 'h33_restablecer_contrasenna_widget.dart'
+    show H33RestablecerContrasennaWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class H4H10ResumenListaModel extends FlutterFlowModel<H4H10ResumenListaWidget> {
+class H33RestablecerContrasennaModel
+    extends FlutterFlowModel<H33RestablecerContrasennaWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for emailAddress widget.
+  FocusNode? emailAddressFocusNode;
+  TextEditingController? emailAddressController;
+  String? Function(BuildContext, String?)? emailAddressControllerValidator;
 
   /// Initialization and disposal methods.
 
@@ -21,6 +29,8 @@ class H4H10ResumenListaModel extends FlutterFlowModel<H4H10ResumenListaWidget> {
 
   void dispose() {
     unfocusNode.dispose();
+    emailAddressFocusNode?.dispose();
+    emailAddressController?.dispose();
   }
 
   /// Action blocks are added here.

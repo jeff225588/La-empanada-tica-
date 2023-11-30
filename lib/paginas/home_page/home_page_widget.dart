@@ -85,12 +85,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               borderWidth: 1.0,
                               buttonSize: 40.0,
                               icon: Icon(
-                                Icons.logout,
+                                Icons.arrow_back,
                                 color: Colors.white,
                                 size: 30.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed('H2-IniciarSesionAdmin');
+                                context.pushNamed('H2-IniciarSesionAdminCopy');
                               },
                             ),
                           ),

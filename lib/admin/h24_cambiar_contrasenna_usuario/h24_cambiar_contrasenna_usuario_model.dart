@@ -1,6 +1,4 @@
 import '/auth/firebase_auth/auth_util.dart';
-import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -9,7 +7,6 @@ import 'h24_cambiar_contrasenna_usuario_widget.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -18,46 +15,30 @@ class H24CambiarContrasennaUsuarioModel
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
-
   // State field(s) for correoUsuario widget.
   FocusNode? correoUsuarioFocusNode;
   TextEditingController? correoUsuarioController;
   String? Function(BuildContext, String?)? correoUsuarioControllerValidator;
-  // State field(s) for ContrasennaUsuario widget.
-  FocusNode? contrasennaUsuarioFocusNode;
-  TextEditingController? contrasennaUsuarioController;
-  late bool contrasennaUsuarioVisibility;
+  // State field(s) for txtcontrasennausuario widget.
+  FocusNode? txtcontrasennausuarioFocusNode;
+  TextEditingController? txtcontrasennausuarioController;
+  late bool txtcontrasennausuarioVisibility;
   String? Function(BuildContext, String?)?
-      contrasennaUsuarioControllerValidator;
-  // State field(s) for txtverificarcontrasenna widget.
-  FocusNode? txtverificarcontrasennaFocusNode;
-  TextEditingController? txtverificarcontrasennaController;
-  late bool txtverificarcontrasennaVisibility;
-  String? Function(BuildContext, String?)?
-      txtverificarcontrasennaControllerValidator;
+      txtcontrasennausuarioControllerValidator;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    contrasennaUsuarioVisibility = false;
-    txtverificarcontrasennaVisibility = false;
+    txtcontrasennausuarioVisibility = false;
   }
 
   void dispose() {
     unfocusNode.dispose();
-    tabBarController?.dispose();
     correoUsuarioFocusNode?.dispose();
     correoUsuarioController?.dispose();
 
-    contrasennaUsuarioFocusNode?.dispose();
-    contrasennaUsuarioController?.dispose();
-
-    txtverificarcontrasennaFocusNode?.dispose();
-    txtverificarcontrasennaController?.dispose();
+    txtcontrasennausuarioFocusNode?.dispose();
+    txtcontrasennausuarioController?.dispose();
   }
 
   /// Action blocks are added here.

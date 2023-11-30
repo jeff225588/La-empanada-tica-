@@ -308,7 +308,9 @@ class _H7AgregarProductosWidgetState extends State<H7AgregarProductosWidget> {
                                             final _datePickedDate =
                                                 await showDatePicker(
                                               context: context,
-                                              initialDate: getCurrentTimestamp,
+                                              initialDate: DateTime
+                                                  .fromMicrosecondsSinceEpoch(
+                                                      1701237600000000),
                                               firstDate: (DateTime
                                                       .fromMicrosecondsSinceEpoch(
                                                           946706400000000) ??

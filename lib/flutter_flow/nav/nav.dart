@@ -80,14 +80,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
           ? HomePageWidget()
-          : H2IniciarSesionAdminWidget(),
+          : H2IniciarSesionAdminCopyWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? HomePageWidget()
-              : H2IniciarSesionAdminWidget(),
+              : H2IniciarSesionAdminCopyWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -144,11 +144,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ProductosNuevaUnidadWidget(),
         ),
         FFRoute(
-          name: 'editarListaEnvio',
-          path: '/editarListaEnvio',
-          builder: (context, params) => EditarListaEnvioWidget(),
-        ),
-        FFRoute(
           name: 'H4-H10-ResumenLista',
           path: '/h4H10ResumenLista',
           builder: (context, params) => H4H10ResumenListaWidget(),
@@ -167,6 +162,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'H24-CambiarContrasennaUsuario',
           path: '/h24CambiarContrasennaUsuario',
           builder: (context, params) => H24CambiarContrasennaUsuarioWidget(),
+        ),
+        FFRoute(
+          name: 'H33-RestablecerContrasenna',
+          path: '/h33RestablecerContrasenna',
+          builder: (context, params) => H33RestablecerContrasennaWidget(),
+        ),
+        FFRoute(
+          name: 'H2-IniciarSesionAdminCopy',
+          path: '/h2IniciarSesionAdminCopy',
+          builder: (context, params) => H2IniciarSesionAdminCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -333,7 +338,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/h2IniciarSesionAdmin';
+            return '/h2IniciarSesionAdminCopy';
           }
           return null;
         },

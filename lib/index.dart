@@ -17,8 +17,6 @@ export '/admindeusuarios/admindeusuarios_widget.dart'
 export '/editarusuario/editarusuario_widget.dart' show EditarusuarioWidget;
 export '/productos/productos_nueva_unidad/productos_nueva_unidad_widget.dart'
     show ProductosNuevaUnidadWidget;
-export '/lista_de_envio/editar_lista_envio/editar_lista_envio_widget.dart'
-    show EditarListaEnvioWidget;
 export '/lista_de_envio/h4_h10_resumen_lista/h4_h10_resumen_lista_widget.dart'
     show H4H10ResumenListaWidget;
 export '/admin/h2_iniciar_sesion_admin/h2_iniciar_sesion_admin_widget.dart'
@@ -27,3 +25,7 @@ export '/sugerencia/h29_envia_sugerencias/h29_envia_sugerencias_widget.dart'
     show H29EnviaSugerenciasWidget;
 export '/admin/h24_cambiar_contrasenna_usuario/h24_cambiar_contrasenna_usuario_widget.dart'
     show H24CambiarContrasennaUsuarioWidget;
+export '/admin/h33_restablecer_contrasenna/h33_restablecer_contrasenna_widget.dart'
+    show H33RestablecerContrasennaWidget;
+export '/admin/h2_iniciar_sesion_admin_copy/h2_iniciar_sesion_admin_copy_widget.dart'
+    show H2IniciarSesionAdminCopyWidget;
