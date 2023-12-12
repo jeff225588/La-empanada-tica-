@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'productos_editar_producto_model.dart';
 export 'productos_editar_producto_model.dart';
 
@@ -83,13 +84,16 @@ class _ProductosEditarProductoWidgetState
               context.pop();
             },
           ),
-          title: Text(
-            'Editar Producto',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Outfit',
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  fontSize: 34.0,
-                ),
+          title: Align(
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Text(
+              'Editar Producto',
+              style: FlutterFlowTheme.of(context).displaySmall.override(
+                    fontFamily: 'Outfit',
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    fontSize: 30.0,
+                  ),
+            ),
           ),
           actions: [],
           centerTitle: true,
@@ -278,8 +282,19 @@ class _ProductosEditarProductoWidgetState
                 ),
               ),
               FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
+                onPressed: () async {
+                  await launchUrl(Uri(
+                      scheme: 'mailto',
+                      path: 'scruzj12@gmail.com',
+                      query: {
+                        'subject': 'Cambio en Producto',
+                        'body':
+                            'Se ha registrado un cambio en el producto:${_model.textController1.text}Por una cantidad de:${_model.textController2.text}',
+                      }
+                          .entries
+                          .map((MapEntry<String, String> e) =>
+                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                          .join('&')));
                 },
                 text: 'Editar',
                 icon: Icon(

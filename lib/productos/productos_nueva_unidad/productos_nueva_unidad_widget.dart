@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'productos_nueva_unidad_model.dart';
@@ -63,19 +64,23 @@ class _ProductosNuevaUnidadWidgetState
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Color(0xFF86080D),
+          backgroundColor: Color(0xFF68010F),
           automaticallyImplyLeading: false,
-          title: Text(
-            'Ingresar Nueva Unidad',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Outfit',
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  fontSize: 34.0,
-                ),
+          title: Align(
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Text(
+              'Ingresar Nueva Unidad',
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).displaySmall.override(
+                    fontFamily: 'Outfit',
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    fontSize: 30.0,
+                  ),
+            ),
           ),
           actions: [],
           centerTitle: false,
-          elevation: 0.0,
+          elevation: 2.0,
         ),
         body: Column(
           mainAxisSize: MainAxisSize.max,
@@ -223,9 +228,8 @@ class _ProductosNuevaUnidadWidgetState
                         context.pushNamed('productosEditarProducto');
                       },
                       text: 'Cancelar y Volver',
-                      icon: Icon(
-                        Icons.keyboard_return,
-                        size: 15.0,
+                      icon: FaIcon(
+                        FontAwesomeIcons.arrowLeft,
                       ),
                       options: FFButtonOptions(
                         height: 40.0,

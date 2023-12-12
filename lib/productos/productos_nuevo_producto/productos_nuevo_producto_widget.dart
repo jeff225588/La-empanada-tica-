@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'productos_nuevo_producto_model.dart';
 export 'productos_nuevo_producto_model.dart';
 
@@ -84,13 +85,16 @@ class _ProductosNuevoProductoWidgetState
               context.pop();
             },
           ),
-          title: Text(
-            'Nuevo Producto',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Outfit',
-                  color: FlutterFlowTheme.of(context).primaryBackground,
-                  fontSize: 34.0,
-                ),
+          title: Align(
+            alignment: AlignmentDirectional(0.00, 0.00),
+            child: Text(
+              'Nuevo Producto',
+              style: FlutterFlowTheme.of(context).displaySmall.override(
+                    fontFamily: 'Outfit',
+                    color: FlutterFlowTheme.of(context).primaryBackground,
+                    fontSize: 30.0,
+                  ),
+            ),
           ),
           actions: [],
           centerTitle: true,
@@ -383,8 +387,19 @@ class _ProductosNuevoProductoWidgetState
                 ),
               ),
               FFButtonWidget(
-                onPressed: () {
-                  print('Button pressed ...');
+                onPressed: () async {
+                  await launchUrl(Uri(
+                      scheme: 'mailto',
+                      path: 'scruzj12@gmail.com',
+                      query: {
+                        'subject': 'Nuevo Producto',
+                        'body':
+                            'Se agregó un nuevo producto con la siguiente descripción${_model.textController1.text}con la unidad de:${_model.dropDownUnidadValue} por una cantidad de:${_model.textController2.text} para la sucursal:${_model.dropDownSucursalesValue}',
+                      }
+                          .entries
+                          .map((MapEntry<String, String> e) =>
+                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                          .join('&')));
                 },
                 text: 'Guardar',
                 icon: Icon(

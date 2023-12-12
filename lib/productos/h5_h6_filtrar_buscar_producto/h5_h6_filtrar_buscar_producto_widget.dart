@@ -63,7 +63,7 @@ class _H5H6FiltrarBuscarProductoWidgetState
         key: scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
+          backgroundColor: Color(0xFF68010F),
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
@@ -84,6 +84,7 @@ class _H5H6FiltrarBuscarProductoWidgetState
             style: FlutterFlowTheme.of(context).displaySmall.override(
                   fontFamily: 'Outfit',
                   color: FlutterFlowTheme.of(context).primaryBackground,
+                  fontSize: 30.0,
                 ),
           ),
           actions: [],
@@ -161,8 +162,8 @@ class _H5H6FiltrarBuscarProductoWidgetState
                       onPressed: () async {
                         await queryProductosRecordOnce()
                             .then(
-                              (records) =>
-                                  _model.simpleSearchResults = TextSearch(
+                              (records) => _model
+                                  .simpleSearchResults = TextSearch(
                                 records
                                     .map(
                                       (record) =>
@@ -174,15 +175,17 @@ class _H5H6FiltrarBuscarProductoWidgetState
                                     )
                                     .toList(),
                               )
-                                      .search(valueOrDefault<String>(
-                                        _model.textFieldBusquedaController.text,
-                                        'Ingrese su busqueda...',
-                                      ))
-                                      .map((r) => r.object)
-                                      .toList(),
+                                  .search(
+                                      _model.textFieldBusquedaController.text)
+                                  .map((r) => r.object)
+                                  .toList(),
                             )
                             .onError((_, __) => _model.simpleSearchResults = [])
                             .whenComplete(() => setState(() {}));
+
+                        setState(() {
+                          _model.noSearch = false;
+                        });
                       },
                     ),
                   ),
@@ -224,7 +227,7 @@ class _H5H6FiltrarBuscarProductoWidgetState
                                     listViewProductosRecordList[listViewIndex];
                                 return Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 5.0, 5.0, 5.0),
+                                      15.0, 15.0, 15.0, 15.0),
                                   child: Container(
                                     width: double.infinity,
                                     decoration: BoxDecoration(

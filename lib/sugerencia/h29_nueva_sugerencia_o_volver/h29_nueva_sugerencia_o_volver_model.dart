@@ -5,6 +5,7 @@ import 'h29_nueva_sugerencia_o_volver_widget.dart'
     show H29NuevaSugerenciaOVolverWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 

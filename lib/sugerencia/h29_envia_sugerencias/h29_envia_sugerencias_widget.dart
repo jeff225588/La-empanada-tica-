@@ -95,7 +95,7 @@ class _H29EnviaSugerenciasWidgetState extends State<H29EnviaSugerenciasWidget> {
                                 size: 30.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed('H2-IniciarSesionAdmin');
+                                context.pushNamed('HomePage');
                               },
                             ),
                           ),

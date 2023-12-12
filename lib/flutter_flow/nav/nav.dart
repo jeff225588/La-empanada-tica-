@@ -78,16 +78,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? HomePageWidget()
-          : H2IniciarSesionAdminWidget(),
+      errorBuilder: (context, state) =>
+          appStateNotifier.loggedIn ? HomePageWidget() : ListaCategoriaWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? HomePageWidget()
-              : H2IniciarSesionAdminWidget(),
+              : ListaCategoriaWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -103,11 +102,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'H5-H6-FiltrarBuscarProducto',
           path: '/h5H6FiltrarBuscarProducto',
           builder: (context, params) => H5H6FiltrarBuscarProductoWidget(),
-        ),
-        FFRoute(
-          name: 'EnvioPorFechasCSV',
-          path: '/envioPorFechasCSV',
-          builder: (context, params) => EnvioPorFechasCSVWidget(),
         ),
         FFRoute(
           name: 'enviosPorSucursal',
@@ -144,14 +138,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => ProductosNuevaUnidadWidget(),
         ),
         FFRoute(
-          name: 'H4-H10-ResumenLista',
-          path: '/h4H10ResumenLista',
-          builder: (context, params) => H4H10ResumenListaWidget(),
-        ),
-        FFRoute(
-          name: 'H2-IniciarSesionAdmin',
-          path: '/h2IniciarSesionAdmin',
-          builder: (context, params) => H2IniciarSesionAdminWidget(),
+          name: 'H4-H10-ResumenListaCSV',
+          path: '/h4H10ResumenListaCSV',
+          builder: (context, params) => H4H10ResumenListaCSVWidget(),
         ),
         FFRoute(
           name: 'H29-EnviaSugerencias',
@@ -172,6 +161,54 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'H2-IniciarSesionAdminCopy',
           path: '/h2IniciarSesionAdminCopy',
           builder: (context, params) => H2IniciarSesionAdminCopyWidget(),
+        ),
+        FFRoute(
+          name: 'Manualdeusuario',
+          path: '/manualdeusuario',
+          builder: (context, params) => ManualdeusuarioWidget(),
+        ),
+        FFRoute(
+          name: 'Paneldeadmin',
+          path: '/paneldeadmin',
+          builder: (context, params) => PaneldeadminWidget(),
+        ),
+        FFRoute(
+          name: 'Informemensualadmin',
+          path: '/informemensualadmin',
+          builder: (context, params) => InformemensualadminWidget(),
+        ),
+        FFRoute(
+          name: 'editarListaDeEnvio',
+          path: '/editarListaDeEnvio',
+          asyncParams: {
+            'listaDiaria':
+                getDoc(['ListaDiaria'], ListaDiariaRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarListaDeEnvioWidget(
+            listaDiaria: params.getParam('listaDiaria', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'editarCategoria',
+          path: '/editarCategoria',
+          asyncParams: {
+            'productoCategoria': getDoc(
+                ['ProductosCategoria'], ProductosCategoriaRecord.fromSnapshot),
+          },
+          builder: (context, params) => EditarCategoriaWidget(
+            productoCategoria:
+                params.getParam('productoCategoria', ParamType.Document),
+          ),
+        ),
+        FFRoute(
+          name: 'agregarCategoria',
+          path: '/agregarCategoria',
+          builder: (context, params) => AgregarCategoriaWidget(),
+        ),
+        FFRoute(
+          name: 'listaCategoria',
+          path: '/listaCategoria',
+          builder: (context, params) => ListaCategoriaWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -338,7 +375,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/h2IniciarSesionAdmin';
+            return '/listaCategoria';
           }
           return null;
         },

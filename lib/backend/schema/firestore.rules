@@ -19,7 +19,7 @@ service cloud.firestore {
       allow create: if true;
       allow read: if true;
       allow write: if false;
-      allow delete: if false;
+      allow delete: if true;
     }
 
     match /Productos/{document} {
@@ -30,10 +30,10 @@ service cloud.firestore {
     }
 
     match /ProductosUnidad/{document} {
-      allow create: if request.auth != null;
-      allow read: if request.auth != null;
+      allow create: if true;
+      allow read: if true;
       allow write: if request.auth != null;
-      allow delete: if request.auth != null;
+      allow delete: if true;
     }
 
     match /Sucursales/{document} {

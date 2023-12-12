@@ -154,7 +154,7 @@ class _H33RestablecerContrasennaWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 16.0),
                 child: Container(
                   width: double.infinity,
                   child: TextFormField(

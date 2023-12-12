@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -28,11 +27,6 @@ class _EnviosPorSucursalWidgetState extends State<EnviosPorSucursalWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => EnviosPorSucursalModel());
-
-    // On page load action.
-    SchedulerBinding.instance.addPostFrameCallback((_) async {
-      context.pushNamed('EnvioPorFechasCSV');
-    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -79,16 +73,13 @@ class _EnviosPorSucursalWidgetState extends State<EnviosPorSucursalWidget> {
               context.pop();
             },
           ),
-          title: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
-            child: Text(
-              'Envíos',
-              textAlign: TextAlign.center,
-              style: FlutterFlowTheme.of(context).displaySmall.override(
-                    fontFamily: 'Outfit',
-                    color: FlutterFlowTheme.of(context).primaryBackground,
-                  ),
-            ),
+          title: Text(
+            'Envíos',
+            textAlign: TextAlign.center,
+            style: FlutterFlowTheme.of(context).displaySmall.override(
+                  fontFamily: 'Outfit',
+                  color: FlutterFlowTheme.of(context).primaryBackground,
+                ),
           ),
           actions: [],
           centerTitle: true,
@@ -183,30 +174,10 @@ class _EnviosPorSucursalWidgetState extends State<EnviosPorSucursalWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 0.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                              'EnvioPorFechasCSV',
-                                              extra: <String, dynamic>{
-                                                kTransitionInfoKey:
-                                                    TransitionInfo(
-                                                  hasTransition: true,
-                                                  transitionType:
-                                                      PageTransitionType
-                                                          .rightToLeft,
-                                                ),
-                                              },
-                                            );
-                                          },
-                                          child: Icon(
-                                            Icons.chevron_right_rounded,
-                                            color: Color(0xFF57636C),
-                                            size: 24.0,
-                                          ),
+                                        child: Icon(
+                                          Icons.chevron_right_rounded,
+                                          color: Color(0xFF57636C),
+                                          size: 24.0,
                                         ),
                                       ),
                                     ],

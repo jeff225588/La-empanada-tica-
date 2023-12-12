@@ -14,6 +14,10 @@ import 'package:text_search/text_search.dart';
 
 class H5H6FiltrarBuscarProductoModel
     extends FlutterFlowModel<H5H6FiltrarBuscarProductoWidget> {
+  ///  Local state fields for this page.
+
+  bool noSearch = true;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -1,16 +1,15 @@
-import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/lista_de_envio/editar_lista_de_envio/editar_lista_de_envio_widget.dart';
-import 'h4_h10_resumen_lista_widget.dart' show H4H10ResumenListaWidget;
+import 'informemensualadmin_widget.dart' show InformemensualadminWidget;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class H4H10ResumenListaModel extends FlutterFlowModel<H4H10ResumenListaWidget> {
+class InformemensualadminModel
+    extends FlutterFlowModel<InformemensualadminWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

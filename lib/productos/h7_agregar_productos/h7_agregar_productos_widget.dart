@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'h7_agregar_productos_model.dart';
 export 'h7_agregar_productos_model.dart';
 
@@ -586,6 +587,18 @@ class _H7AgregarProductosWidgetState extends State<H7AgregarProductosWidget> {
                               FlutterFlowTheme.of(context).secondary,
                         ),
                       );
+                      await launchUrl(Uri(
+                          scheme: 'mailto',
+                          path: 'scruzj12@gmail.com',
+                          query: {
+                            'subject': 'Cambio en Productos',
+                            'body':
+                                'Se ha realizado el siguiente cambio en lista para el siguiente producto:${widget.passProductosDescripcion} en la categoria:${widget.passCategoria} por una cantidad de:${widget.passUnidad}',
+                          }
+                              .entries
+                              .map((MapEntry<String, String> e) =>
+                                  '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                              .join('&')));
                     },
                     text: 'Agregar a Lista de Envío',
                     icon: Icon(
