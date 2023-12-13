@@ -69,11 +69,11 @@ class _InformemensualadminWidgetState extends State<InformemensualadminWidget> {
               size: 30.0,
             ),
             onPressed: () async {
-              context.pop();
+              context.pushNamed('Paneldeadmin');
             },
           ),
           title: Text(
-            'Informe mensual',
+            'Informe',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -88,7 +88,44 @@ class _InformemensualadminWidgetState extends State<InformemensualadminWidget> {
           top: true,
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            children: [],
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                child: Container(
+                  width: 160.0,
+                  height: 111.0,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8.0),
+                    child: Image.asset(
+                      'assets/images/La_Empanada_Alajuelita.jpg',
+                      width: 300.0,
+                      height: 200.0,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                child: Text(
+                  'Reporte de eficiencia y opiniones de usuarios sobre la aplicación empana-tica \n',
+                  textAlign: TextAlign.justify,
+                  style: FlutterFlowTheme.of(context).titleLarge,
+                ),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/images/Captura_de_pantalla_2023-12-12_200803.png',
+                  width: 343.0,
+                  height: 303.0,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ],
           ),
         ),
       ),

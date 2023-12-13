@@ -78,15 +78,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? HomePageWidget() : ListaCategoriaWidget(),
+      errorBuilder: (context, state) => appStateNotifier.loggedIn
+          ? HomePageWidget()
+          : H2IniciarSesionAdminCopyWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
               ? HomePageWidget()
-              : ListaCategoriaWidget(),
+              : H2IniciarSesionAdminCopyWidget(),
         ),
         FFRoute(
           name: 'HomePage',
@@ -102,11 +103,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'H5-H6-FiltrarBuscarProducto',
           path: '/h5H6FiltrarBuscarProducto',
           builder: (context, params) => H5H6FiltrarBuscarProductoWidget(),
-        ),
-        FFRoute(
-          name: 'enviosPorSucursal',
-          path: '/enviosPorSucursal',
-          builder: (context, params) => EnviosPorSucursalWidget(),
         ),
         FFRoute(
           name: 'productosEditarProducto',
@@ -375,7 +371,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/listaCategoria';
+            return '/h2IniciarSesionAdminCopy';
           }
           return null;
         },

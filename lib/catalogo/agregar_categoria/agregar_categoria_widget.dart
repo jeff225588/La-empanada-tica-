@@ -285,6 +285,11 @@ class _AgregarCategoriaWidgetState extends State<AgregarCategoriaWidget> {
                                 0.0, 10.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+
                                 await ProductosCategoriaRecord.collection
                                     .doc()
                                     .set(createProductosCategoriaRecordData(

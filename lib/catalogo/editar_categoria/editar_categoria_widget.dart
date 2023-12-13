@@ -291,6 +291,11 @@ class _EditarCategoriaWidgetState extends State<EditarCategoriaWidget> {
                                 0.0, 10.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+
                                 await widget.productoCategoria!.reference
                                     .update(createProductosCategoriaRecordData(
                                   productosCategoriaNombre:

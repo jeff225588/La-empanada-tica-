@@ -4,8 +4,6 @@ export '/admin/h1_crear_cuenta_usuario/h1_crear_cuenta_usuario_widget.dart'
     show H1CrearCuentaUsuarioWidget;
 export '/productos/h5_h6_filtrar_buscar_producto/h5_h6_filtrar_buscar_producto_widget.dart'
     show H5H6FiltrarBuscarProductoWidget;
-export '/paginas/envios_por_sucursal/envios_por_sucursal_widget.dart'
-    show EnviosPorSucursalWidget;
 export '/productos/productos_editar_producto/productos_editar_producto_widget.dart'
     show ProductosEditarProductoWidget;
 export '/productos/productos_nuevo_producto/productos_nuevo_producto_widget.dart'

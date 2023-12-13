@@ -803,6 +803,11 @@ class _EditarListaDeEnvioWidgetState extends State<EditarListaDeEnvioWidget> {
                                 0.0, 10.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
+                                if (_model.formKey.currentState == null ||
+                                    !_model.formKey.currentState!.validate()) {
+                                  return;
+                                }
+
                                 await widget.listaDiaria!.reference
                                     .update(createListaDiariaRecordData(
                                   productosDescripcion:

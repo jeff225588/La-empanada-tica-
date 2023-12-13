@@ -72,13 +72,17 @@ class _PaneldeadminWidgetState extends State<PaneldeadminWidget> {
               context.pushNamed('HomePage');
             },
           ),
-          title: Text(
-            'Panel de admistracion',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                ),
+          title: Align(
+            alignment: AlignmentDirectional(-0.50, 0.00),
+            child: Text(
+              'Panel de admistracion',
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    fontFamily: 'Outfit',
+                    color: Colors.white,
+                    fontSize: 22.0,
+                  ),
+            ),
           ),
           actions: [],
           centerTitle: false,
@@ -89,13 +93,125 @@ class _PaneldeadminWidgetState extends State<PaneldeadminWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset(
-                  'assets/images/La_Empanada_Alajuelita.jpg',
-                  width: 300.0,
-                  height: 370.0,
-                  fit: BoxFit.cover,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(
+                    'assets/images/La_Empanada_Alajuelita.jpg',
+                    width: 300.0,
+                    height: 370.0,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FFButtonWidget(
+                      onPressed: () async {
+                        context.pushNamed('H4-H10-ResumenListaCSV');
+                      },
+                      text: 'Lista de envios',
+                      options: FFButtonOptions(
+                        height: 40.0,
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 0.0, 24.0, 0.0),
+                        iconPadding:
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                        color: Color(0xFF251213),
+                        textStyle:
+                            FlutterFlowTheme.of(context).titleSmall.override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                ),
+                        elevation: 3.0,
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 10.0, 10.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed('H1-CrearCuentaUsuario');
+                            },
+                            text: 'Crear usuario',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: Color(0xFF251213),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 10.0, 10.0, 0.0),
+                        child: AuthUserStreamWidget(
+                          builder: (context) => FFButtonWidget(
+                            onPressed: () async {
+                              context.pushNamed('admindeusuarios');
+                            },
+                            text: 'Editar usuario ',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: Color(0xFF251213),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
               Row(
@@ -104,9 +220,9 @@ class _PaneldeadminWidgetState extends State<PaneldeadminWidget> {
                 children: [
                   FFButtonWidget(
                     onPressed: () async {
-                      context.pushNamed('H4-H10-ResumenListaCSV');
+                      context.pushNamed('Informemensualadmin');
                     },
-                    text: 'Lista de envios',
+                    text: 'Informe \n',
                     options: FFButtonOptions(
                       height: 40.0,
                       padding:
@@ -127,78 +243,6 @@ class _PaneldeadminWidgetState extends State<PaneldeadminWidget> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                ],
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('H1-CrearCuentaUsuario');
-                          },
-                          text: 'Crear usuario',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xFF251213),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (valueOrDefault(currentUserDocument?.rol, '') == 'admin')
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 0.0),
-                      child: AuthUserStreamWidget(
-                        builder: (context) => FFButtonWidget(
-                          onPressed: () async {
-                            context.pushNamed('admindeusuarios');
-                          },
-                          text: 'Editar usuario ',
-                          options: FFButtonOptions(
-                            height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xFF251213),
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                            elevation: 3.0,
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                        ),
-                      ),
-                    ),
                 ],
               ),
             ],
